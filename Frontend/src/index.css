@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Bungee&family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap");
+
+/* Tailwind CSS should be imported AFTER other styles */
+@import "tailwindcss";
+
+/* Uncomment this if you want Outfit to be the default for all elements */
+/* 
+* {
+  font-family: "Outfit", sans-serif;
+}
+*/
+
+html,
+body {
+  overflow: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  body {
+    font-family: "League Spartan", sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-bungee {
+    font-family: "Bungee", cursive;
+  }
+
+  .font-spartan {
+    font-family: "League Spartan", sans-serif;
+  }
+
+  .font-anton {
+    font-family: "Anton", sans-serif;
+  }
+
+  .font-bebas {
+    font-family: "Bebas Neue", sans-serif;
+  }
+
+  /* Added Outfit font utility */
+  .font-outfit {
+    font-family: "Outfit", sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-blue-75 {
+    --tw-text-opacity: 1;
+    color: rgb(223 223 242 / var(--tw-text-opacity)); /* #dfdff2 */
+  }
+}
