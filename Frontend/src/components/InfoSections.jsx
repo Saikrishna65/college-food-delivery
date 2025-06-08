@@ -119,82 +119,28 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { assets } from "../assets/assets";
 import AnimatedText from "./AnimatedText";
+import { foodData } from "../assets/assets";
 import ScrollTextReveal from "./ScrollTextReveal";
+import {
+  Search,
+  SlidersHorizontal,
+  Pizza,
+  Cookie,
+  Wine,
+  Grid3X3,
+  Star,
+  Heart,
+} from "lucide-react";
 
-const menuData = [
-  {
-    id: 1,
-    category: "Sides",
-    title: "Chicken wings",
-    price: "$17.00 USD",
-    imgSrc: "/images/chicken-wings.jpg",
-  },
-  {
-    id: 2,
-    category: "Sides",
-    title: "Chicken nuggets",
-    price: "$16.00 USD",
-    imgSrc: "/images/chicken-nuggets.jpg",
-  },
-  {
-    id: 3,
-    category: "Sides",
-    title: "French fries",
-    price: "$12.00 USD",
-    imgSrc: "/images/french-fries.jpg",
-  },
-  {
-    id: 4,
-    category: "Sides",
-    title: "Mozzarella sticks",
-    price: "$15.00 USD",
-    imgSrc: "/images/mozzarella-sticks.jpg",
-  },
-  {
-    id: 5,
-    category: "Sides",
-    title: "Onion rings",
-    price: "$16.00 USD",
-    imgSrc: "/images/onion-rings.jpg",
-  },
-  {
-    id: 6,
-    category: "Sides",
-    title: "Tuna salad",
-    price: "$18.00 USD",
-    imgSrc: "/images/tuna-salad.jpg",
-  },
-  {
-    id: 7,
-    category: "Main",
-    title: "Grilled Steak",
-    price: "$25.00 USD",
-    imgSrc: "/images/steak.jpg",
-  },
-  {
-    id: 8,
-    category: "Drinks",
-    title: "Lemonade",
-    price: "$5.00 USD",
-    imgSrc: "/images/lemonade.jpg",
-  },
-  {
-    id: 9,
-    category: "Desserts",
-    title: "Cheesecake",
-    price: "$7.00 USD",
-    imgSrc: "/images/cheesecake.jpg",
-  },
-];
-
-const tabs = ["Sides", "Main", "Drinks", "Desserts"];
+const tabs = ["rice", "snacks", "drinks", "desserts"];
 
 gsap.registerPlugin(ScrollTrigger);
 
 const InfoSections = () => {
-  const [activeTab, setActiveTab] = useState("Sides");
+  const [activeTab, setActiveTab] = useState("rice");
+  const [favorites, setFavorites] = useState(new Set());
 
-  const filteredItems = menuData.filter((item) => item.category === activeTab);
+  const filteredItems = foodData.filter((item) => item.category === activeTab);
 
   const redRef = useRef(null);
   const endRef = useRef(null);
@@ -202,6 +148,22 @@ const InfoSections = () => {
   const headingRef = useRef(null);
   const wrapperRef = useRef(null);
   const containerRef = useRef(null);
+
+  const toggleFavorite = (id) => {
+    setFavorites((prev) => {
+      const newFavorites = new Set(prev);
+      newFavorites.has(id) ? newFavorites.delete(id) : newFavorites.add(id);
+      return newFavorites;
+    });
+  };
+
+  const handleOnClick = (id) => {
+    navigate(`/food/${id}`);
+  };
+
+  const addToCart = (id) => {
+    console.log("Adding food item", id, "to cart");
+  };
 
   useEffect(() => {
     // Animate from tiny center dot ➔ huge overflowing circle
@@ -282,14 +244,14 @@ const InfoSections = () => {
               className="absolute top-0 right-0 z-20 h-dvh flex items-center justify-center w-screen text-white"
             >
               {/* Left half of the heading */}
-              <h1 className="md:text-8xl text-5xl text-end text-white w-[50%] pr-8 font-outfit">
+              <h1 className="md:text-8xl text-[45px] text-end text-white w-[50%] pr-8 font-outfit">
                 EXPLORE
               </h1>
 
               {/* Expanding white circle shape */}
               <div
                 ref={expandRef}
-                className="absolute inset-0 bg-[#FFFAF0] flex items-center justify-center"
+                className="absolute inset-0 bg-gray-100 flex items-center justify-center"
                 style={{
                   /* Initial tiny dot at center: 1% radius */
                   clipPath: "circle(1% at 50% 50%)",
@@ -297,16 +259,16 @@ const InfoSections = () => {
                 }}
               >
                 {/* Content inside the circle */}
-                <h1 className="md:text-8xl text-5xl font-bold text-end text-green-400 w-[50%] pr-8 font-outfit">
+                <h1 className="md:text-8xl text-[45px] font-bold text-end text-green-400 w-[50%] pr-8 font-outfit">
                   EXPLORE
                 </h1>
-                <h1 className="md:text-8xl text-5xl font-bold text-start text-green-400 w-[50%] pl-8 font-outfit">
+                <h1 className="md:text-8xl text-[45px] font-bold text-start text-green-400 w-[50%] pl-8 font-outfit">
                   TASTES
                 </h1>
               </div>
 
               {/* Right half of the heading (visible above the expanding circle) */}
-              <h1 className="md:text-8xl text-5xl text-start text-white w-[50%] pl-8 font-outfit">
+              <h1 className="md:text-8xl text-[45px] text-start text-white w-[50%] pl-8 font-outfit">
                 TASTES
               </h1>
             </div>
@@ -328,54 +290,98 @@ const InfoSections = () => {
               className="absolute top-[1050px] right-24 md:top-[1500px] md:right-[500px] z-20 h-30 w-24 md:h-80 md:w-60 bg-cover bg-center"
               style={{ backgroundImage: `url(${assets.foodShow4})` }}
             ></div>
-            <div className="absolute bottom-0 z-20 md:h-[500px] h-[600px] w-screen bg-green-500">
-              <div className="flex justify-center space-x-6">
-                {tabs.map((tab) => {
-                  const isActive = tab === activeTab;
+            <div className="absolute bottom-0 z-20 md:h-[500px] h-[600px] w-screen">
+              <div className="grid grid-cols-4 gap-4">
+                {[
+                  { label: "Rice", category: "rice", Icon: Pizza },
+                  { label: "Snacks", category: "snacks", Icon: Cookie },
+                  { label: "Drinks", category: "drinks", Icon: Wine },
+                  { label: "More", category: "all", Icon: Grid3X3 },
+                ].map(({ label, category, Icon }) => {
+                  const isActive = filteredItems === category;
+                  const padding = isActive ? "p-5" : "p-4";
                   return (
                     <button
-                      key={tab}
-                      onClick={() => setActiveTab(tab)}
-                      className={
-                        `px-8 py-3 rounded-full font-semibold text-lg transition-colors duration-300 ` +
-                        (isActive
-                          ? "bg-white text-black"
-                          : "border border-white text-white bg-transparent hover:bg-white hover:text-black")
-                      }
+                      key={category}
+                      onClick={() => setActiveTab(category)}
+                      className={`flex flex-col items-center group transition-transform cursor-pointer ${
+                        isActive ? "scale-110" : "scale-100"
+                      }`}
                     >
-                      {tab}
+                      <div
+                        className={`bg-red-100 text-red-600 ${padding} rounded-2xl mb-1 group-hover:shadow-md transition-shadow`}
+                      >
+                        <Icon className="w-6 h-6 md:w-8 md:h-8" />
+                      </div>
+                      <span
+                        className={`text-sm md:text-base ${
+                          isActive ? "font-bold" : "text-gray-700"
+                        }`}
+                      >
+                        {label}
+                      </span>
                     </button>
                   );
                 })}
               </div>
+
               {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-10"> */}
-              <div className="flex items-center justify-center gap-6 mt-10">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 mt-16 px-5 bg-gray-100">
                 {filteredItems.slice(0, 4).map((item) => (
                   <div
                     key={item.id}
-                    className=" rounded-2xl shadow-md h-80 w-60 flex flex-col items-center bg-red-500"
+                    className="bg-white rounded-xl shadow-lg overflow-hidden pb-1 cursor-pointer"
+                    onClick={() => handleOnClick(item.id)}
                   >
-                    <div className="w-full h-[60%] bg-red-500 rounded-t-2xl">
-                      {/* <img
-                      src={item.imgSrc}
-                      alt={item.title}
-                      className="w-full h-full bg-red-500 object-cover rounded-t-2xl"
-                    /> */}
+                    <div className="relative p-1.5">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-[120px] sm:h-[160px] md:h-[200px] object-cover rounded-lg"
+                      />
+                      <div className="absolute top-3 left-3 bg-white rounded-full px-1.5 py-0.5 flex items-center gap-0.5">
+                        <Star className="w-3 h-3 md:w-4 md:h-4 fill-red-500 text-red-500" />
+                        <span className="text-xs md:text-sm font-semibold text-black">
+                          {item.rating}
+                        </span>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavorite(item.id);
+                        }}
+                        className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow-md hover:bg-gray-50 transition-colors cursor-pointer"
+                      >
+                        <Heart
+                          className={`w-3 h-3 md:w-5 md:h-5 ${
+                            favorites.has(item.id)
+                              ? "fill-red-500 text-red-500"
+                              : "text-gray-400"
+                          }`}
+                        />
+                      </button>
                     </div>
-
-                    <h2 className="text-lg font-semibold">{item.title}</h2>
-                    <p className="text-sm text-gray-500 text-center">
-                      {item.desc}
-                    </p>
-                    <div className="flex justify-between items-center w-full mt-4 px-2">
-                      <span className="font-semibold text-black">
-                        ${item.price}
-                      </span>
-                      <span
-                        className={`w-4 h-4 rounded-full ${
-                          item.favorite ? "bg-yellow-400" : "bg-gray-400"
-                        }`}
-                      ></span>
+                    <div className="p-1.5">
+                      <h3 className="font-semibold text-sm text-black md:text-lg truncate">
+                        {item.name}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600 text-xs md:text-sm truncate">
+                          {item.restaurant}
+                        </span>
+                        <span className="font-semibold text-sm md:text-base">
+                          ${item.price.toFixed(1)}
+                        </span>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(item.id);
+                        }}
+                        className="mt-2 w-[85%] mx-auto flex justify-center items-center text-sm py-1 px-3 border border-green-600 text-green-600 bg-green-100 hover:bg-green-600 hover:text-white transition-colors rounded"
+                      >
+                        Add to Cart
+                      </button>
                     </div>
                   </div>
                 ))}

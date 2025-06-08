@@ -54,8 +54,10 @@ const Footer = () => {
 
   return (
     <footer className="w-full h-dvh bg-red-600 text-white fixed bottom-0 left-0 z-0">
-      <div className="flex items-center px-8 pt-5">
-        <div className="text-4xl font-bungee font-bold">CampusCravings</div>
+      <div className="flex items-center px-8 pt-5 ">
+        <div className="text-[33px] md:text-4xl font-bungee font-bold">
+          CampusCravings
+        </div>
         <div id="string" className="ml-4">
           <svg width="1300" height="50">
             <path d={initialPath} stroke="white" fill="transparent" />
@@ -121,7 +123,7 @@ const Footer = () => {
       </div>
 
       <div className="w-full overflow-hidden">
-        <h1 className="font-bold -mt-16 text-[14rem] text-center font-bebas">
+        <h1 className="font-bold -mt-16 md:text-[14rem] text-center font-bebas">
           CAMPUS CARVINGS
         </h1>
       </div>

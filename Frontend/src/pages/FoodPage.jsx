@@ -13,12 +13,17 @@ import {
   Heart,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import axios from "axios";
 
 function FoodPage() {
   const [favorites, setFavorites] = useState(new Set());
   const [selectedCategory, setSelectedCategory] = useState("rice");
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const { setCart } = useContext(AppContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,8 +50,35 @@ function FoodPage() {
     navigate(`/food/${id}`);
   };
 
-  const addToCart = (id) => {
-    console.log("Adding food item", id, "to cart");
+  const addToCart = async (_id) => {
+    console.log("Adding to cart:", _id);
+    const token = localStorage.getItem("user token");
+    if (!token) return navigate("/login");
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/cart/add`,
+        { foodItemId: _id, quantity: 1 }, // ✅ this is the fix
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        console.log("Added to cart", response.data);
+      }
+    } catch (err) {
+      console.error(
+        "addToCart failed:",
+        err.response?.data?.message || err.message
+      );
+      if (err.response?.status === 401) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    }
   };
 
   const handleSearch = () => {
@@ -73,7 +105,7 @@ function FoodPage() {
       <Navbar />
       <div className="min-h-screen">
         {/* Hero Section */}
-        <div className="bg-[url('./assets/food-page-hero.jpg')] bg-cover bg-center text-gray-700 p-6 mt-10 min-h-[30vh] md:min-h-[50vh] lg:min-h-screen relative">
+        <div className="bg-[url('./assets/food-page-hero.jpg')] bg-cover bg-center text-gray-700 p-6 min-h-[30vh] md:min-h-[50vh] lg:min-h-screen relative">
           <div className="max-w-md mx-auto md:max-w-4xl lg:max-w-6xl md:pt-20 lg:pt-40 lg:pl-10">
             <h1 className="absolute bottom-8 left-5 text-3xl md:static md:text-5xl lg:text-6xl font-bold mb-2">
               Taste the
@@ -157,7 +189,7 @@ function FoodPage() {
                     <div
                       key={item.id}
                       className="bg-white rounded-xl shadow-lg overflow-hidden pb-1 cursor-pointer"
-                      onClick={() => handleOnClick(item.id)}
+                      onClick={() => handleOnClick(item._id)}
                     >
                       <div className="relative p-1.5">
                         <img
@@ -202,7 +234,7 @@ function FoodPage() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            addToCart(item.id);
+                            addToCart(item._id);
                           }}
                           className="mt-2 w-[85%] mx-auto flex justify-center items-center text-sm py-1 px-3 border border-red-600 text-red-600 bg-red-100 hover:bg-red-600 hover:text-white transition-colors rounded"
                         >

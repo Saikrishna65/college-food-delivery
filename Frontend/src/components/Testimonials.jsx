@@ -78,9 +78,15 @@ const Testimonials = () => {
               lineWrapperClass="overflow-hidden"
               lineClass="md:text-8xl text-5xl font-extrabold text-green-600"
             />
-            <p className="mt-2 text-xl text-gray-600 font-outfit">
+            {/* <p className="mt-2 text-xl text-gray-600 font-outfit">
               Satisfied students and staff since launch
-            </p>
+            </p> */}
+            <ScrollTextReveal
+              lines={["Satisfied students and staff since launch"]}
+              containerClass=""
+              lineWrapperClass="overflow-hidden"
+              lineClass="mt-2 text-xl text-gray-600 font-outfit"
+            />
           </div>
 
           {/* Right column (avatars, text, buttons) */}

@@ -19,7 +19,7 @@ const ProfileNavbar = ({ toggleSidebar }) => {
       <ul className="list-none hidden min-[901px]:flex">
         <li className="flex items-center space-x-2">
           <a
-            href="/"
+            href="/logout"
             className="text-black no-underline transition-colors duration-300 ease hover:text-[#ff0303]"
           >
             Logout

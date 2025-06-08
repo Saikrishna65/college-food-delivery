@@ -417,7 +417,7 @@ export const restaurentsData = [
 export const foodData = [
   // Rice items (IDs 1 to 15)
   {
-    id: 1,
+    _id: 1,
     name: "Hyderabadi Chicken Biryani",
     restaurant: "Biryani House",
     restaurantAddress: "123 Biryani Street, Hyderabad, India",
@@ -432,7 +432,7 @@ export const foodData = [
     tags: ["🍗 Nonveg", "🔥 Spicy"],
   },
   {
-    id: 2,
+    _id: "68441f7a769c682381d23394",
     name: "Vegetable Fried Rice",
     restaurant: "Asian Wok",
     restaurantAddress: "456 Wok Avenue, Singapore",
@@ -447,7 +447,7 @@ export const foodData = [
     tags: ["🍃 Veg", "🧊 Light"],
   },
   {
-    id: 3,
+    _id: 3,
     name: "Mutton Lucknowi Biryani",
     restaurant: "Royal Kitchen",
     restaurantAddress: "789 Royal Road, Lucknow, India",
@@ -462,7 +462,7 @@ export const foodData = [
     tags: ["🍗 Nonveg", "🍛 Rich"],
   },
   {
-    id: 4,
+    _id: 4,
     name: "Schezwan Fried Rice",
     restaurant: "Dragon Express",
     restaurantAddress: "101 Dragon Blvd, Beijing, China",
@@ -477,7 +477,7 @@ export const foodData = [
     tags: ["🍗 Nonveg", "🔥 Spicy"],
   },
   {
-    id: 5,
+    _id: 5,
     name: "Kolkata Chicken Biryani",
     restaurant: "Bengal Flavors",
     restaurantAddress: "202 Bengal Street, Kolkata, India",
@@ -492,7 +492,7 @@ export const foodData = [
     tags: ["🍗 Nonveg", "🔥 Spicy"],
   },
   {
-    id: 6,
+    _id: 6,
     name: "Thai Basil Fried Rice",
     restaurant: "Thai Spice",
     restaurantAddress: "303 Spice Road, Bangkok, Thailand",
@@ -507,7 +507,7 @@ export const foodData = [
     tags: ["🍗 Nonveg", "🌿 Aromatic"],
   },
   {
-    id: 7,
+    _id: 7,
     name: "Egg Fried Rice",
     restaurant: "Wok Master",
     restaurantAddress: "404 Master Lane, Beijing, China",
@@ -521,533 +521,533 @@ export const foodData = [
     category: "rice",
     tags: ["🍗 Nonveg", "⚡ Quick"],
   },
-  {
-    id: 8,
-    name: "Awadhi Mutton Biryani",
-    restaurant: "Nawabi Kitchen",
-    restaurantAddress: "505 Nawab Circle, Lucknow, India",
-    description:
-      "Indulge in Awadhi Mutton Biryani with tender mutton, aromatic rice, and a delicate blend of spices that exude Nawabi elegance.",
-    price: 19.99,
-    rating: 4.9,
-    reviews: 158,
-    image:
-      "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍗 Nonveg", "🍛 Rich"],
-  },
-  {
-    id: 9,
-    name: "Kimchi Fried Rice",
-    restaurant: "Seoul Kitchen",
-    restaurantAddress: "606 Seoul Street, Seoul, South Korea",
-    description:
-      "Experience a fusion twist with Kimchi Fried Rice that pairs tangy kimchi with perfectly stir-fried rice for a bold, vibrant taste.",
-    price: 13.99,
-    rating: 4.6,
-    reviews: 84,
-    image:
-      "https://images.unsplash.com/photo-1580651315530-69c8e0026377?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍃 Veg", "🍋 Tangy"],
-  },
-  {
-    id: 10,
-    name: "Malabar Prawn Biryani",
-    restaurant: "Coastal Flavors",
-    restaurantAddress: "707 Coastal Drive, Mumbai, India",
-    description:
-      "Enjoy Malabar Prawn Biryani where succulent prawns and aromatic rice combine with coastal spices and a hint of coconut.",
-    price: 20.99,
-    rating: 4.8,
-    reviews: 132,
-    image:
-      "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍗 Nonveg", "🐟 Seafood"],
-  },
-  {
-    id: 11,
-    name: "Pineapple Fried Rice",
-    restaurant: "Thai Paradise",
-    restaurantAddress: "808 Paradise Ave, Pattaya, Thailand",
-    description:
-      "Taste the tropical twist in Pineapple Fried Rice, where sweet pineapple and savory rice create a refreshing, balanced dish.",
-    price: 14.99,
-    rating: 4.7,
-    reviews: 90,
-    image:
-      "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍃 Veg", "🏝️ Tropical"],
-  },
-  {
-    id: 12,
-    name: "Calicut Chicken Biryani",
-    restaurant: "Kerala Kitchen",
-    restaurantAddress: "909 Kerala Road, Kochi, India",
-    description:
-      "Relish Calicut Chicken Biryani with tender chicken and South Indian spices layered with fragrant rice for a hearty meal.",
-    price: 16.5,
-    rating: 4.8,
-    reviews: 115,
-    image:
-      "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍗 Nonveg", "🔥 Spicy"],
-  },
-  {
-    id: 13,
-    name: "Yangzhou Fried Rice",
-    restaurant: "Chinese Palace",
-    restaurantAddress: "111 Palace St, Beijing, China",
-    description:
-      "Delight in Yangzhou Fried Rice with a subtle blend of flavors, tender ingredients, and a light, savory finish honoring Chinese tradition.",
-    price: 15.5,
-    rating: 4.7,
-    reviews: 98,
-    image:
-      "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍗 Nonveg", "🍄 Umami"],
-  },
-  {
-    id: 14,
-    name: "Sindhi Vegetable Biryani",
-    restaurant: "Sindh House",
-    restaurantAddress: "121 Sindh Road, Karachi, Pakistan",
-    description:
-      "Enjoy Sindhi Vegetable Biryani—a colorful mix of fresh vegetables, aromatic spices, and fluffy rice that creates a hearty vegetarian delight.",
-    price: 14.99,
-    rating: 4.6,
-    reviews: 105,
-    image:
-      "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍃 Veg", "🌿 Aromatic"],
-  },
-  {
-    id: 15,
-    name: "Nasi Goreng",
-    restaurant: "Indonesian Delights",
-    restaurantAddress: "131 Delight Street, Jakarta, Indonesia",
-    description:
-      "Discover the bold taste of Nasi Goreng—Indonesia's signature fried rice with a spicy, sweet, and savory medley that captivates the palate.",
-    price: 13.99,
-    rating: 4.8,
-    reviews: 120,
-    image:
-      "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80",
-    category: "rice",
-    tags: ["🍗 Nonveg", "🔥 Spicy"],
-  },
-
-  // Snacks items (IDs 16 to 27)
-  {
-    id: 16,
-    name: "Margherita Pizza",
-    restaurant: "Pizza Palace",
-    restaurantAddress: "141 Pizza Plaza, New York, USA",
-    description:
-      "Savor a classic Margherita Pizza with a thin, crispy crust topped with fresh tomatoes, mozzarella, and basil—a timeless Italian favorite.",
-    price: 10.0,
-    rating: 4.7,
-    reviews: 134,
-    image:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍃 Veg", "🧀 Cheesy"],
-  },
-  {
-    id: 17,
-    name: "Veggie Supreme",
-    restaurant: "Green Bites",
-    restaurantAddress: "151 Green Street, San Francisco, USA",
-    description:
-      "Experience Veggie Supreme pizza loaded with a generous mix of fresh vegetables and zesty sauce on a crisp, golden base.",
-    price: 4.5,
-    rating: 4.8,
-    reviews: 89,
-    image:
-      "https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍃 Veg", "😋 Delicious"],
-  },
-  {
-    id: 18,
-    name: "Mozzarella Sticks",
-    restaurant: "Cheese Delights",
-    restaurantAddress: "161 Cheese Avenue, Wisconsin, USA",
-    description:
-      "Indulge in crispy, golden Mozzarella Sticks with a melty center, served hot with tangy marinara sauce for a satisfying snack.",
-    price: 6.5,
-    rating: 4.7,
-    reviews: 73,
-    image:
-      "https://images.unsplash.com/photo-1548340748-6d2b7d7da280?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍃 Veg", "🧀 Cheesy"],
-  },
-  {
-    id: 19,
-    name: "Burger Beef 'Anjaz'",
-    restaurant: "Burger Boz",
-    restaurantAddress: "171 Burger Lane, Chicago, USA",
-    description:
-      "Savor a hearty Burger Beef 'Anjaz' with a juicy beef patty, spicy seasoning, and robust toppings for a satisfying flavor punch.",
-    price: 5.0,
-    rating: 4.9,
-    reviews: 102,
-    image:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍗 Nonveg", "🍖 Savory"],
-  },
-  {
-    id: 20,
-    name: "Chicken Wings",
-    restaurant: "Wing Zone",
-    restaurantAddress: "181 Wing Road, Atlanta, USA",
-    description:
-      "Enjoy crispy, spicy Chicken Wings served with a cooling dip—perfectly balanced for a flavorful snack or meal.",
-    price: 8.0,
-    rating: 4.6,
-    reviews: 87,
-    image:
-      "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍗 Nonveg", "🔥 Spicy"],
-  },
-  {
-    id: 21,
-    name: "BBQ Bacon",
-    restaurant: "Smoke House",
-    restaurantAddress: "191 Smoke Blvd, Los Angeles, USA",
-    description:
-      "Relish smoky BBQ Bacon served in a sandwich or as a side, with a perfect crunch and tangy flavor.",
-    price: 7.0,
-    rating: 4.9,
-    reviews: 110,
-    image:
-      "https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍗 Nonveg", "🔥 Smoky"],
-  },
-  {
-    id: 22,
-    name: "French Fries",
-    restaurant: "Fry Heaven",
-    restaurantAddress: "201 Fry Street, New York, USA",
-    description:
-      "Enjoy perfectly crispy French Fries that are golden and salted to perfection—an ideal side or snack.",
-    price: 4.0,
-    rating: 4.4,
-    reviews: 95,
-    image:
-      "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍃 Veg", "🍟 Crispy"],
-  },
-  {
-    id: 23,
-    name: "Double Stack",
-    restaurant: "Stack House",
-    restaurantAddress: "211 Stack Avenue, Boston, USA",
-    description:
-      "Delight in a Double Stack burger featuring two juicy patties, fresh toppings, and a signature sauce for an extra burst of flavor.",
-    price: 7.5,
-    rating: 4.6,
-    reviews: 89,
-    image:
-      "https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍗 Nonveg", "😋 Delicious"],
-  },
-  {
-    id: 24,
-    name: "Pepperoni Pizza",
-    restaurant: "Pizza Hut",
-    restaurantAddress: "221 Pizza Road, Houston, USA",
-    description:
-      "Savor a classic Pepperoni Pizza with a crispy crust, spicy pepperoni, and melty mozzarella—a perfect blend of tangy and rich flavors.",
-    price: 12.5,
-    rating: 4.5,
-    reviews: 120,
-    image:
-      "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍗 Nonveg", "🔥 Spicy"],
-  },
-  {
-    id: 25,
-    name: "Classic Cheeseburger",
-    restaurant: "Burger House",
-    restaurantAddress: "231 Burger Avenue, Dallas, USA",
-    description:
-      "Relish a Classic Cheeseburger with a grilled beef patty, melted cheese, and fresh lettuce and tomato—a timeless comfort food.",
-    price: 6.5,
-    rating: 4.7,
-    reviews: 105,
-    image:
-      "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍗 Nonveg", "🍖 Savory"],
-  },
-  {
-    id: 26,
-    name: "Nachos Supreme",
-    restaurant: "Tex-Mex Grill",
-    restaurantAddress: "241 Tex-Mex Blvd, Austin, USA",
-    description:
-      "Enjoy Nachos Supreme loaded with crispy tortilla chips, melted cheese, salsa, and vibrant toppings for a bold Tex-Mex snack experience.",
-    price: 9.5,
-    rating: 4.8,
-    reviews: 87,
-    image:
-      "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍃 Veg", "😋 Delicious"],
-  },
-  {
-    id: 27,
-    name: "Mushroom Swiss",
-    restaurant: "Burger Joint",
-    restaurantAddress: "251 Joint Street, Miami, USA",
-    description:
-      "Savor a Mushroom Swiss burger topped with sautéed mushrooms and melted Swiss cheese atop a juicy patty for an earthy, indulgent flavor.",
-    price: 6.0,
-    rating: 4.8,
-    reviews: 82,
-    image:
-      "https://images.unsplash.com/photo-1551615593-ef5fe247e8f7?auto=format&fit=crop&w=800&q=80",
-    category: "snacks",
-    tags: ["🍃 Veg", "🧀 Cheesy"],
-  },
-
-  // Drinks items (IDs 28 to 42)
-  {
-    id: 28,
-    name: "Oreo Milkshake",
-    restaurant: "Shake Shack",
-    restaurantAddress: "261 Shake Street, New York, USA",
-    description:
-      "Indulge in a creamy Oreo Milkshake where crushed Oreos blend with rich milk for a decadently sweet treat.",
-    price: 6.99,
-    rating: 4.8,
-    reviews: 115,
-    image:
-      "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍭 Sweet"],
-  },
-  {
-    id: 29,
-    name: "Mango Lassi",
-    restaurant: "Lassi Corner",
-    restaurantAddress: "271 Lassi Lane, Mumbai, India",
-    description:
-      "Refresh with a Mango Lassi made from ripe mangoes and creamy yogurt—a tangy and cooling traditional drink.",
-    price: 5.5,
-    rating: 4.7,
-    reviews: 92,
-    image:
-      "https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "💧 Refreshing"],
-  },
-  {
-    id: 30,
-    name: "Classic Mojito",
-    restaurant: "Mocktail Bar",
-    restaurantAddress: "281 Mocktail Road, London, UK",
-    description:
-      "Savor a Classic Mojito with fresh mint, lime, and soda, offering a balanced mix of sweetness and citrus.",
-    price: 7.99,
-    rating: 4.9,
-    reviews: 107,
-    image:
-      "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "💧 Refreshing"],
-  },
-  {
-    id: 31,
-    name: "Strawberry Smoothie",
-    restaurant: "Smoothie World",
-    restaurantAddress: "291 Smoothie Ave, Los Angeles, USA",
-    description:
-      "Enjoy a Strawberry Smoothie made with fresh strawberries and yogurt, delivering a fruity, tangy, and refreshing burst in every sip.",
-    price: 6.5,
-    rating: 4.6,
-    reviews: 88,
-    image:
-      "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍓 Fruity"],
-  },
-  {
-    id: 32,
-    name: "Chocolate Milkshake",
-    restaurant: "Shake Haven",
-    restaurantAddress: "301 Haven Street, Chicago, USA",
-    description:
-      "Delight in a rich Chocolate Milkshake blended with premium chocolate and creamy milk for a smooth, indulgent treat.",
-    price: 6.99,
-    rating: 4.8,
-    reviews: 101,
-    image:
-      "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍭 Sweet"],
-  },
-  {
-    id: 33,
-    name: "Blue Lagoon Mocktail",
-    restaurant: "Ocean Breeze",
-    restaurantAddress: "311 Ocean Drive, Miami, USA",
-    description:
-      "Refresh with a Blue Lagoon Mocktail that blends citrus and tropical fruits into a vibrant, invigorating beverage.",
-    price: 8.5,
-    rating: 4.7,
-    reviews: 94,
-    image:
-      "https://images.unsplash.com/photo-1560508180-03f285f67ded?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🏝️ Tropical"],
-  },
-  {
-    id: 34,
-    name: "Vanilla Bean Shake",
-    restaurant: "Creamy Delights",
-    restaurantAddress: "321 Creamy Road, San Francisco, USA",
-    description:
-      "Enjoy a smooth Vanilla Bean Shake bursting with real vanilla bean flavor blended with creamy milk for a luxuriously sweet beverage.",
-    price: 5.99,
-    rating: 4.5,
-    reviews: 86,
-    image:
-      "https://images.unsplash.com/photo-1528740096961-3798add19cb7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhbiUyMHNoYWtlfGVufDB8fDB8fHww",
-    category: "drinks",
-    tags: ["🍃 Veg", "🥛 Creamy"],
-  },
-  {
-    id: 35,
-    name: "Virgin Piña Colada",
-    restaurant: "Tropical Tastes",
-    restaurantAddress: "331 Tropical Ave, Honolulu, USA",
-    description:
-      "Transport yourself with a Virgin Piña Colada where pineapple and coconut blend into a refreshing, non-alcoholic tropical drink.",
-    price: 7.99,
-    rating: 4.9,
-    reviews: 93,
-    image:
-      "https://images.unsplash.com/photo-1619604395920-a16f33192a50?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🏝️ Tropical"],
-  },
-  {
-    id: 36,
-    name: "Berry Blast Smoothie",
-    restaurant: "Berry Bar",
-    restaurantAddress: "341 Berry Lane, Portland, USA",
-    description:
-      "Refresh with a Berry Blast Smoothie made with mixed berries and yogurt for a tangy, sweet burst of flavor.",
-    price: 6.99,
-    rating: 4.6,
-    reviews: 79,
-    image:
-      "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍓 Fruity"],
-  },
-  {
-    id: 37,
-    name: "Butterscotch Shake",
-    restaurant: "Sweet Spot",
-    restaurantAddress: "351 Sweet Street, Austin, USA",
-    description:
-      "Indulge in a rich Butterscotch Shake with deep caramel notes and a smooth, creamy texture—a decadent dessert drink.",
-    price: 7.99,
-    rating: 4.8,
-    reviews: 83,
-    image:
-      "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍭 Sweet"],
-  },
-  {
-    id: 38,
-    name: "Mint Lemonade",
-    restaurant: "Fresh & Cool",
-    restaurantAddress: "361 Fresh Blvd, Vancouver, Canada",
-    description:
-      "Quench your thirst with a zesty Mint Lemonade where cool mint and freshly squeezed lemon juice come together for an invigorating, crisp drink.",
-    price: 4.99,
-    rating: 4.7,
-    reviews: 76,
-    image:
-      "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "💧 Refreshing"],
-  },
-  {
-    id: 39,
-    name: "Cookie Cream Shake",
-    restaurant: "Cookie Castle",
-    restaurantAddress: "371 Cookie Road, New York, USA",
-    description:
-      "Treat yourself to a Cookie Cream Shake where crunchy cookie bits blend with creamy milk for a rich, indulgent dessert drink.",
-    price: 6.5,
-    rating: 4.8,
-    reviews: 81,
-    image:
-      "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍭 Sweet"],
-  },
-  {
-    id: 40,
-    name: "Passion Fruit Mojito",
-    restaurant: "Tropical Mix",
-    restaurantAddress: "381 Tropical Street, Orlando, USA",
-    description:
-      "Refresh with a Passion Fruit Mojito that blends tropical passion fruit with mint and lime for a tangy, invigorating cocktail.",
-    price: 7.5,
-    rating: 4.7,
-    reviews: 88,
-    image:
-      "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🏝️ Tropical"],
-  },
-  {
-    id: 41,
-    name: "Nutella Milkshake",
-    restaurant: "Chocolate Haven",
-    restaurantAddress: "391 Chocolate Ave, Paris, France",
-    description:
-      "Enjoy a luscious Nutella Milkshake blending rich Nutella with creamy milk for a velvety, decadent treat that delights every sweet tooth.",
-    price: 7.99,
-    rating: 4.9,
-    reviews: 102,
-    image:
-      "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍭 Sweet"],
-  },
-  {
-    id: 42,
-    name: "Virgin Margarita",
-    restaurant: "Mocktail Lounge",
-    restaurantAddress: "401 Lounge Blvd, London, UK",
-    description:
-      "Refresh with a crisp Virgin Margarita that balances tangy citrus with subtle sweetness for a perfectly refreshing non-alcoholic cocktail.",
-    price: 6.99,
-    rating: 4.8,
-    reviews: 95,
-    image:
-      "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
-    category: "drinks",
-    tags: ["🍃 Veg", "🍊 Citrusy"],
-  },
 ];
+// {
+//   id: 8,
+//   name: "Awadhi Mutton Biryani",
+//   restaurant: "Nawabi Kitchen",
+//   restaurantAddress: "505 Nawab Circle, Lucknow, India",
+//   description:
+//     "Indulge in Awadhi Mutton Biryani with tender mutton, aromatic rice, and a delicate blend of spices that exude Nawabi elegance.",
+//   price: 19.99,
+//   rating: 4.9,
+//   reviews: 158,
+//   image:
+//     "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍗 Nonveg", "🍛 Rich"],
+// },
+// {
+//   id: 9,
+//   name: "Kimchi Fried Rice",
+//   restaurant: "Seoul Kitchen",
+//   restaurantAddress: "606 Seoul Street, Seoul, South Korea",
+//   description:
+//     "Experience a fusion twist with Kimchi Fried Rice that pairs tangy kimchi with perfectly stir-fried rice for a bold, vibrant taste.",
+//   price: 13.99,
+//   rating: 4.6,
+//   reviews: 84,
+//   image:
+//     "https://images.unsplash.com/photo-1580651315530-69c8e0026377?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍃 Veg", "🍋 Tangy"],
+// },
+// {
+//   id: 10,
+//   name: "Malabar Prawn Biryani",
+//   restaurant: "Coastal Flavors",
+//   restaurantAddress: "707 Coastal Drive, Mumbai, India",
+//   description:
+//     "Enjoy Malabar Prawn Biryani where succulent prawns and aromatic rice combine with coastal spices and a hint of coconut.",
+//   price: 20.99,
+//   rating: 4.8,
+//   reviews: 132,
+//   image:
+//     "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍗 Nonveg", "🐟 Seafood"],
+// },
+// {
+//   id: 11,
+//   name: "Pineapple Fried Rice",
+//   restaurant: "Thai Paradise",
+//   restaurantAddress: "808 Paradise Ave, Pattaya, Thailand",
+//   description:
+//     "Taste the tropical twist in Pineapple Fried Rice, where sweet pineapple and savory rice create a refreshing, balanced dish.",
+//   price: 14.99,
+//   rating: 4.7,
+//   reviews: 90,
+//   image:
+//     "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍃 Veg", "🏝️ Tropical"],
+// },
+// {
+//   id: 12,
+//   name: "Calicut Chicken Biryani",
+//   restaurant: "Kerala Kitchen",
+//   restaurantAddress: "909 Kerala Road, Kochi, India",
+//   description:
+//     "Relish Calicut Chicken Biryani with tender chicken and South Indian spices layered with fragrant rice for a hearty meal.",
+//   price: 16.5,
+//   rating: 4.8,
+//   reviews: 115,
+//   image:
+//     "https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍗 Nonveg", "🔥 Spicy"],
+// },
+// {
+//   id: 13,
+//   name: "Yangzhou Fried Rice",
+//   restaurant: "Chinese Palace",
+//   restaurantAddress: "111 Palace St, Beijing, China",
+//   description:
+//     "Delight in Yangzhou Fried Rice with a subtle blend of flavors, tender ingredients, and a light, savory finish honoring Chinese tradition.",
+//   price: 15.5,
+//   rating: 4.7,
+//   reviews: 98,
+//   image:
+//     "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍗 Nonveg", "🍄 Umami"],
+// },
+// {
+//   id: 14,
+//   name: "Sindhi Vegetable Biryani",
+//   restaurant: "Sindh House",
+//   restaurantAddress: "121 Sindh Road, Karachi, Pakistan",
+//   description:
+//     "Enjoy Sindhi Vegetable Biryani—a colorful mix of fresh vegetables, aromatic spices, and fluffy rice that creates a hearty vegetarian delight.",
+//   price: 14.99,
+//   rating: 4.6,
+//   reviews: 105,
+//   image:
+//     "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍃 Veg", "🌿 Aromatic"],
+// },
+// {
+//   id: 15,
+//   name: "Nasi Goreng",
+//   restaurant: "Indonesian Delights",
+//   restaurantAddress: "131 Delight Street, Jakarta, Indonesia",
+//   description:
+//     "Discover the bold taste of Nasi Goreng—Indonesia's signature fried rice with a spicy, sweet, and savory medley that captivates the palate.",
+//   price: 13.99,
+//   rating: 4.8,
+//   reviews: 120,
+//   image:
+//     "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80",
+//   category: "rice",
+//   tags: ["🍗 Nonveg", "🔥 Spicy"],
+// },
+
+// // Snacks items (IDs 16 to 27)
+// {
+//   id: 16,
+//   name: "Margherita Pizza",
+//   restaurant: "Pizza Palace",
+//   restaurantAddress: "141 Pizza Plaza, New York, USA",
+//   description:
+//     "Savor a classic Margherita Pizza with a thin, crispy crust topped with fresh tomatoes, mozzarella, and basil—a timeless Italian favorite.",
+//   price: 10.0,
+//   rating: 4.7,
+//   reviews: 134,
+//   image:
+//     "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍃 Veg", "🧀 Cheesy"],
+// },
+// {
+//   id: 17,
+//   name: "Veggie Supreme",
+//   restaurant: "Green Bites",
+//   restaurantAddress: "151 Green Street, San Francisco, USA",
+//   description:
+//     "Experience Veggie Supreme pizza loaded with a generous mix of fresh vegetables and zesty sauce on a crisp, golden base.",
+//   price: 4.5,
+//   rating: 4.8,
+//   reviews: 89,
+//   image:
+//     "https://images.unsplash.com/photo-1590947132387-155cc02f3212?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍃 Veg", "😋 Delicious"],
+// },
+// {
+//   id: 18,
+//   name: "Mozzarella Sticks",
+//   restaurant: "Cheese Delights",
+//   restaurantAddress: "161 Cheese Avenue, Wisconsin, USA",
+//   description:
+//     "Indulge in crispy, golden Mozzarella Sticks with a melty center, served hot with tangy marinara sauce for a satisfying snack.",
+//   price: 6.5,
+//   rating: 4.7,
+//   reviews: 73,
+//   image:
+//     "https://images.unsplash.com/photo-1548340748-6d2b7d7da280?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍃 Veg", "🧀 Cheesy"],
+// },
+// {
+//   id: 19,
+//   name: "Burger Beef 'Anjaz'",
+//   restaurant: "Burger Boz",
+//   restaurantAddress: "171 Burger Lane, Chicago, USA",
+//   description:
+//     "Savor a hearty Burger Beef 'Anjaz' with a juicy beef patty, spicy seasoning, and robust toppings for a satisfying flavor punch.",
+//   price: 5.0,
+//   rating: 4.9,
+//   reviews: 102,
+//   image:
+//     "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍗 Nonveg", "🍖 Savory"],
+// },
+// {
+//   id: 20,
+//   name: "Chicken Wings",
+//   restaurant: "Wing Zone",
+//   restaurantAddress: "181 Wing Road, Atlanta, USA",
+//   description:
+//     "Enjoy crispy, spicy Chicken Wings served with a cooling dip—perfectly balanced for a flavorful snack or meal.",
+//   price: 8.0,
+//   rating: 4.6,
+//   reviews: 87,
+//   image:
+//     "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍗 Nonveg", "🔥 Spicy"],
+// },
+// {
+//   id: 21,
+//   name: "BBQ Bacon",
+//   restaurant: "Smoke House",
+//   restaurantAddress: "191 Smoke Blvd, Los Angeles, USA",
+//   description:
+//     "Relish smoky BBQ Bacon served in a sandwich or as a side, with a perfect crunch and tangy flavor.",
+//   price: 7.0,
+//   rating: 4.9,
+//   reviews: 110,
+//   image:
+//     "https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍗 Nonveg", "🔥 Smoky"],
+// },
+// {
+//   id: 22,
+//   name: "French Fries",
+//   restaurant: "Fry Heaven",
+//   restaurantAddress: "201 Fry Street, New York, USA",
+//   description:
+//     "Enjoy perfectly crispy French Fries that are golden and salted to perfection—an ideal side or snack.",
+//   price: 4.0,
+//   rating: 4.4,
+//   reviews: 95,
+//   image:
+//     "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍃 Veg", "🍟 Crispy"],
+// },
+// {
+//   id: 23,
+//   name: "Double Stack",
+//   restaurant: "Stack House",
+//   restaurantAddress: "211 Stack Avenue, Boston, USA",
+//   description:
+//     "Delight in a Double Stack burger featuring two juicy patties, fresh toppings, and a signature sauce for an extra burst of flavor.",
+//   price: 7.5,
+//   rating: 4.6,
+//   reviews: 89,
+//   image:
+//     "https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍗 Nonveg", "😋 Delicious"],
+// },
+// {
+//   id: 24,
+//   name: "Pepperoni Pizza",
+//   restaurant: "Pizza Hut",
+//   restaurantAddress: "221 Pizza Road, Houston, USA",
+//   description:
+//     "Savor a classic Pepperoni Pizza with a crispy crust, spicy pepperoni, and melty mozzarella—a perfect blend of tangy and rich flavors.",
+//   price: 12.5,
+//   rating: 4.5,
+//   reviews: 120,
+//   image:
+//     "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍗 Nonveg", "🔥 Spicy"],
+// },
+// {
+//   id: 25,
+//   name: "Classic Cheeseburger",
+//   restaurant: "Burger House",
+//   restaurantAddress: "231 Burger Avenue, Dallas, USA",
+//   description:
+//     "Relish a Classic Cheeseburger with a grilled beef patty, melted cheese, and fresh lettuce and tomato—a timeless comfort food.",
+//   price: 6.5,
+//   rating: 4.7,
+//   reviews: 105,
+//   image:
+//     "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍗 Nonveg", "🍖 Savory"],
+// },
+// {
+//   id: 26,
+//   name: "Nachos Supreme",
+//   restaurant: "Tex-Mex Grill",
+//   restaurantAddress: "241 Tex-Mex Blvd, Austin, USA",
+//   description:
+//     "Enjoy Nachos Supreme loaded with crispy tortilla chips, melted cheese, salsa, and vibrant toppings for a bold Tex-Mex snack experience.",
+//   price: 9.5,
+//   rating: 4.8,
+//   reviews: 87,
+//   image:
+//     "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍃 Veg", "😋 Delicious"],
+// },
+// {
+//   id: 27,
+//   name: "Mushroom Swiss",
+//   restaurant: "Burger Joint",
+//   restaurantAddress: "251 Joint Street, Miami, USA",
+//   description:
+//     "Savor a Mushroom Swiss burger topped with sautéed mushrooms and melted Swiss cheese atop a juicy patty for an earthy, indulgent flavor.",
+//   price: 6.0,
+//   rating: 4.8,
+//   reviews: 82,
+//   image:
+//     "https://images.unsplash.com/photo-1551615593-ef5fe247e8f7?auto=format&fit=crop&w=800&q=80",
+//   category: "snacks",
+//   tags: ["🍃 Veg", "🧀 Cheesy"],
+// },
+
+// // Drinks items (IDs 28 to 42)
+// {
+//   id: 28,
+//   name: "Oreo Milkshake",
+//   restaurant: "Shake Shack",
+//   restaurantAddress: "261 Shake Street, New York, USA",
+//   description:
+//     "Indulge in a creamy Oreo Milkshake where crushed Oreos blend with rich milk for a decadently sweet treat.",
+//   price: 6.99,
+//   rating: 4.8,
+//   reviews: 115,
+//   image:
+//     "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍭 Sweet"],
+// },
+// {
+//   id: 29,
+//   name: "Mango Lassi",
+//   restaurant: "Lassi Corner",
+//   restaurantAddress: "271 Lassi Lane, Mumbai, India",
+//   description:
+//     "Refresh with a Mango Lassi made from ripe mangoes and creamy yogurt—a tangy and cooling traditional drink.",
+//   price: 5.5,
+//   rating: 4.7,
+//   reviews: 92,
+//   image:
+//     "https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "💧 Refreshing"],
+// },
+// {
+//   id: 30,
+//   name: "Classic Mojito",
+//   restaurant: "Mocktail Bar",
+//   restaurantAddress: "281 Mocktail Road, London, UK",
+//   description:
+//     "Savor a Classic Mojito with fresh mint, lime, and soda, offering a balanced mix of sweetness and citrus.",
+//   price: 7.99,
+//   rating: 4.9,
+//   reviews: 107,
+//   image:
+//     "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "💧 Refreshing"],
+// },
+// {
+//   id: 31,
+//   name: "Strawberry Smoothie",
+//   restaurant: "Smoothie World",
+//   restaurantAddress: "291 Smoothie Ave, Los Angeles, USA",
+//   description:
+//     "Enjoy a Strawberry Smoothie made with fresh strawberries and yogurt, delivering a fruity, tangy, and refreshing burst in every sip.",
+//   price: 6.5,
+//   rating: 4.6,
+//   reviews: 88,
+//   image:
+//     "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍓 Fruity"],
+// },
+// {
+//   id: 32,
+//   name: "Chocolate Milkshake",
+//   restaurant: "Shake Haven",
+//   restaurantAddress: "301 Haven Street, Chicago, USA",
+//   description:
+//     "Delight in a rich Chocolate Milkshake blended with premium chocolate and creamy milk for a smooth, indulgent treat.",
+//   price: 6.99,
+//   rating: 4.8,
+//   reviews: 101,
+//   image:
+//     "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍭 Sweet"],
+// },
+// {
+//   id: 33,
+//   name: "Blue Lagoon Mocktail",
+//   restaurant: "Ocean Breeze",
+//   restaurantAddress: "311 Ocean Drive, Miami, USA",
+//   description:
+//     "Refresh with a Blue Lagoon Mocktail that blends citrus and tropical fruits into a vibrant, invigorating beverage.",
+//   price: 8.5,
+//   rating: 4.7,
+//   reviews: 94,
+//   image:
+//     "https://images.unsplash.com/photo-1560508180-03f285f67ded?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🏝️ Tropical"],
+// },
+// {
+//   id: 34,
+//   name: "Vanilla Bean Shake",
+//   restaurant: "Creamy Delights",
+//   restaurantAddress: "321 Creamy Road, San Francisco, USA",
+//   description:
+//     "Enjoy a smooth Vanilla Bean Shake bursting with real vanilla bean flavor blended with creamy milk for a luxuriously sweet beverage.",
+//   price: 5.99,
+//   rating: 4.5,
+//   reviews: 86,
+//   image:
+//     "https://images.unsplash.com/photo-1528740096961-3798add19cb7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhbiUyMHNoYWtlfGVufDB8fDB8fHww",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🥛 Creamy"],
+// },
+// {
+//   id: 35,
+//   name: "Virgin Piña Colada",
+//   restaurant: "Tropical Tastes",
+//   restaurantAddress: "331 Tropical Ave, Honolulu, USA",
+//   description:
+//     "Transport yourself with a Virgin Piña Colada where pineapple and coconut blend into a refreshing, non-alcoholic tropical drink.",
+//   price: 7.99,
+//   rating: 4.9,
+//   reviews: 93,
+//   image:
+//     "https://images.unsplash.com/photo-1619604395920-a16f33192a50?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🏝️ Tropical"],
+// },
+// {
+//   id: 36,
+//   name: "Berry Blast Smoothie",
+//   restaurant: "Berry Bar",
+//   restaurantAddress: "341 Berry Lane, Portland, USA",
+//   description:
+//     "Refresh with a Berry Blast Smoothie made with mixed berries and yogurt for a tangy, sweet burst of flavor.",
+//   price: 6.99,
+//   rating: 4.6,
+//   reviews: 79,
+//   image:
+//     "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍓 Fruity"],
+// },
+// {
+//   id: 37,
+//   name: "Butterscotch Shake",
+//   restaurant: "Sweet Spot",
+//   restaurantAddress: "351 Sweet Street, Austin, USA",
+//   description:
+//     "Indulge in a rich Butterscotch Shake with deep caramel notes and a smooth, creamy texture—a decadent dessert drink.",
+//   price: 7.99,
+//   rating: 4.8,
+//   reviews: 83,
+//   image:
+//     "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍭 Sweet"],
+// },
+// {
+//   id: 38,
+//   name: "Mint Lemonade",
+//   restaurant: "Fresh & Cool",
+//   restaurantAddress: "361 Fresh Blvd, Vancouver, Canada",
+//   description:
+//     "Quench your thirst with a zesty Mint Lemonade where cool mint and freshly squeezed lemon juice come together for an invigorating, crisp drink.",
+//   price: 4.99,
+//   rating: 4.7,
+//   reviews: 76,
+//   image:
+//     "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "💧 Refreshing"],
+// },
+// {
+//   id: 39,
+//   name: "Cookie Cream Shake",
+//   restaurant: "Cookie Castle",
+//   restaurantAddress: "371 Cookie Road, New York, USA",
+//   description:
+//     "Treat yourself to a Cookie Cream Shake where crunchy cookie bits blend with creamy milk for a rich, indulgent dessert drink.",
+//   price: 6.5,
+//   rating: 4.8,
+//   reviews: 81,
+//   image:
+//     "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍭 Sweet"],
+// },
+// {
+//   id: 40,
+//   name: "Passion Fruit Mojito",
+//   restaurant: "Tropical Mix",
+//   restaurantAddress: "381 Tropical Street, Orlando, USA",
+//   description:
+//     "Refresh with a Passion Fruit Mojito that blends tropical passion fruit with mint and lime for a tangy, invigorating cocktail.",
+//   price: 7.5,
+//   rating: 4.7,
+//   reviews: 88,
+//   image:
+//     "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🏝️ Tropical"],
+// },
+// {
+//   id: 41,
+//   name: "Nutella Milkshake",
+//   restaurant: "Chocolate Haven",
+//   restaurantAddress: "391 Chocolate Ave, Paris, France",
+//   description:
+//     "Enjoy a luscious Nutella Milkshake blending rich Nutella with creamy milk for a velvety, decadent treat that delights every sweet tooth.",
+//   price: 7.99,
+//   rating: 4.9,
+//   reviews: 102,
+//   image:
+//     "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍭 Sweet"],
+// },
+// {
+//   id: 42,
+//   name: "Virgin Margarita",
+//   restaurant: "Mocktail Lounge",
+//   restaurantAddress: "401 Lounge Blvd, London, UK",
+//   description:
+//     "Refresh with a crisp Virgin Margarita that balances tangy citrus with subtle sweetness for a perfectly refreshing non-alcoholic cocktail.",
+//   price: 6.99,
+//   rating: 4.8,
+//   reviews: 95,
+//   image:
+//     "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80",
+//   category: "drinks",
+//   tags: ["🍃 Veg", "🍊 Citrusy"],
+// },

@@ -1,19 +1,58 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { User, Mail, Lock, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AppContext } from "../context/AppContext";
 
-const Login = () => {
+const AuthForm = () => {
   const navigate = useNavigate();
-  const [state, setState] = useState("Login");
+  const { setUser, setVendor } = useContext(AppContext);
+
+  const [authEntity, setAuthEntity] = useState("user"); // "user" or "vendor"
+  const [authAction, setAuthAction] = useState("login"); // "login" or "register"
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    // Log form data for frontend-only demonstration
-    console.log("Form submitted:", { state, name, email, password });
+    setError("");
+
+    const payload = { email, password };
+    if (authAction === "register" && authEntity === "user") {
+      payload.name = name;
+      payload.mobile = mobile;
+    }
+
+    try {
+      const url = `${
+        import.meta.env.VITE_BASE_URL
+      }/${authEntity}s/${authAction}`;
+
+      const response = await axios.post(url, payload);
+
+      if (response.status === 200 || response.status === 201) {
+        const { token, user, vendor } = response.data;
+        localStorage.setItem(
+          authEntity === "user" ? "user token" : "vendor token",
+          token
+        );
+
+        if (authEntity === "user") {
+          setUser(user);
+          navigate(authAction === "login" ? "/" : "/login");
+        } else {
+          setVendor(vendor);
+          navigate("/vendor/dashboard");
+        }
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
+    }
   };
 
   useEffect(() => {
@@ -24,86 +63,124 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 backdrop-blur-sm bg-black/30 flex justify-center items-center">
+    <div className="fixed inset-0 backdrop-blur-sm bg-black/30 flex justify-center items-center">
       <motion.form
         onSubmit={onSubmitHandler}
         initial={{ opacity: 0.2, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
         viewport={{ once: true }}
-        className="relative bg-white p-10 rounded-xl text-slate-500"
+        className="relative bg-white p-10 rounded-xl text-slate-500 w-full max-w-md"
       >
-        <h1 className="text-center text-2xl text-neutral-700 font-medium">
-          {state}
-        </h1>
-        <p className="text-sm">Welcome back! Please sign in to continue</p>
+        {/* Entity toggle */}
+        <div className="flex justify-center gap-4 mb-4">
+          {["user", "vendor"].map((ent) => (
+            <button
+              key={ent}
+              type="button"
+              onClick={() => {
+                setAuthEntity(ent);
+                if (ent === "vendor") setAuthAction("login");
+              }}
+              className={`px-4 py-1 rounded-full ${
+                authEntity === ent
+                  ? "bg-blue-600 text-white"
+                  : "border border-slate-300"
+              }`}
+            >
+              {ent.charAt(0).toUpperCase() + ent.slice(1)}
+            </button>
+          ))}
+        </div>
 
-        {state !== "Login" && (
-          <div className="border px-6 py-2 flex items-center gap-2 rounded-full mt-5">
-            <User size={20} className="text-slate-500" />
-            <input
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              className="outline-none text-sm"
-              placeholder="Full Name"
-              required
-            />
-          </div>
+        <h1 className="text-center text-2xl text-neutral-700 font-medium">
+          {authAction === "login" ? "Login" : "Sign Up"}
+        </h1>
+        <p className="text-sm mb-4 text-center">
+          {authAction === "login"
+            ? "Welcome back! Please sign in to continue"
+            : "Create your account"}
+        </p>
+
+        {/* Name & Mobile for user registration only */}
+        {authAction === "register" && authEntity === "user" && (
+          <>
+            <div className="border px-6 py-2 flex items-center gap-2 rounded-full mb-4">
+              <User size={20} className="text-slate-500" />
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                placeholder="Full Name"
+                className="outline-none text-sm w-full"
+                required
+              />
+            </div>
+            <div className="border px-6 py-2 flex items-center gap-2 rounded-full mb-4">
+              <User size={20} className="text-slate-500" />
+              <input
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+                type="tel"
+                placeholder="Mobile Number"
+                className="outline-none text-sm w-full"
+                required
+              />
+            </div>
+          </>
         )}
 
-        <div className="border px-6 py-2 flex items-center gap-2 rounded-full mt-5">
+        <div className="border px-6 py-2 flex items-center gap-2 rounded-full mb-4">
           <Mail size={20} className="text-slate-500" />
           <input
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
-            className="outline-none text-sm"
             placeholder="Email"
+            className="outline-none text-sm w-full"
             required
           />
         </div>
 
-        <div className="border px-6 py-2 flex items-center gap-2 rounded-full mt-5">
+        <div className="border px-6 py-2 flex items-center gap-2 rounded-full mb-4">
           <Lock size={20} className="text-slate-500" />
           <input
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
-            className="outline-none text-sm"
             placeholder="Password"
+            className="outline-none text-sm w-full"
             required
           />
         </div>
 
-        <p className="text-sm text-blue-600 my-4 cursor-pointer">
-          Forgot password?
-        </p>
+        {error && (
+          <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+        )}
+
         <button
           type="submit"
-          className="bg-blue-600 w-full text-white py-2 rounded-full"
+          className="bg-blue-600 w-full text-white py-2 rounded-full mb-4"
         >
-          {state === "Login" ? "Login" : "Create an Account"}
+          {authAction === "login" ? "Login" : "Sign Up"}
         </button>
 
-        {state === "Login" ? (
-          <p className="mt-5 text-center">
-            Don't have an account?{" "}
-            <span
-              className="text-blue-500 cursor-pointer"
-              onClick={() => setState("SignUp")}
-            >
-              Sign up
-            </span>
-          </p>
-        ) : (
-          <p className="mt-5 text-center">
-            Already have an account?{" "}
-            <span
-              className="text-blue-500 cursor-pointer"
-              onClick={() => setState("Login")}
-            >
-              Login
-            </span>
-          </p>
-        )}
+        <p className="text-center text-sm">
+          {authAction === "login"
+            ? "Don't have an account?"
+            : "Already have an account?"}{" "}
+          <span
+            className={`text-blue-500 cursor-pointer ${
+              authEntity === "vendor" ? "pointer-events-none opacity-50" : ""
+            }`}
+            onClick={() => {
+              if (authEntity === "vendor") return;
+              setAuthAction(authAction === "login" ? "register" : "login");
+            }}
+          >
+            {authAction === "login" ? "Sign Up" : "Login"}
+          </span>
+        </p>
 
         <X
           onClick={() => navigate("/")}
@@ -115,4 +192,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default AuthForm;

@@ -462,7 +462,7 @@ const FeaturedSection = () => {
         >
           {[...Array(6)].map((_, i) => (
             <div key={i} className="flex items-center gap-10">
-              <span className="text-lg md:text-4xl font-bold pl-20 text-amber-500 font-bebas">
+              <span className="text-4xl font-bold pl-20 text-amber-500 font-bebas">
                 {i % 2 === 0
                   ? "Fuel Your Study Time"
                   : "Skip The Line, Order Online!"}

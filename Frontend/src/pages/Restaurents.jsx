@@ -25,7 +25,7 @@ const Restaurants = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="bg-[url('./assets/restaurent-page-hero.jpg')] bg-cover bg-center text-gray-700 p-6 mt-10 min-h-[30vh] md:min-h-[50vh] lg:min-h-screen relative flex items-center justify-center">
+      <div className="bg-[url('./assets/restaurent-page-hero.jpg')] bg-cover bg-center text-gray-700 p-6 min-h-[30vh] md:min-h-[50vh] lg:min-h-screen relative flex items-center justify-center">
         <div className="lg:absolute lg:inset-0 lg:flex lg:items-center lg:justify-center">
           <div className="text-center">
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6">
