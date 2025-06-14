@@ -11,6 +11,10 @@ const ItemSchema = new mongoose.Schema({
 
 const OrderSchema = new mongoose.Schema(
   {
+    orderId: {
+      type: String,
+      unique: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -25,11 +29,17 @@ const OrderSchema = new mongoose.Schema(
     },
     orderType: { type: String, required: true },
     payment: { type: String, required: true },
+    paymentStatus: {
+      type: String,
+      enum: ["pending", "paid"],
+      default: "pending",
+    },
     orderStatus: {
       type: String,
-      enum: ["Processing", "Delivered", "Cancelled"],
-      default: "Processing",
+      enum: ["processing", "confirmed", "delivered", "cancelled"],
+      default: "processing",
     },
+    orderedDate: { type: Date, default: Date.now },
     address: { type: String },
     deliveredTime: { type: Date, default: null },
     dineInTime: { type: Date, default: null },

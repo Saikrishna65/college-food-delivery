@@ -16,6 +16,7 @@ const cartRoutes = require("./routes/cart.routes");
 const vendorRoutes = require("./routes/vendor.routes");
 const orderRoutes = require("./routes/order.routes");
 const notificationRoutes = require("./routes/notification.routes");
+const foodRoutes = require("./routes/food.routes");
 
 // Initialize Express app
 const app = express();
@@ -43,15 +44,11 @@ app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/vendors", vendorRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/vendors", notificationRoutes);
+app.use("/api/v1/food", foodRoutes);
 
 // Create HTTP server
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
-
-app.use((req, res, next) => {
-  req.socketService = socketService;
-  next();
-});
 
 // Start server
 server.listen(port, () => {

@@ -1,125 +1,8 @@
-// import React, { useRef, useEffect } from "react";
-// import gsap from "gsap";
-// import { useGSAP } from "@gsap/react"; // Corrected import path
-// import { ScrollTrigger } from "gsap/all";
-// import { assets } from "../assets/assets";
-// import Button from "./Button";
-// import AnimatedText from "./AnimatedText";
-
-// gsap.registerPlugin(ScrollTrigger);
-
-// const InfoSections = () => {
-//   const containerRef = useRef(null);
-
-//   // Animate H2 words on scroll
-//   // useEffect(() => {
-//   //   const ctx = gsap.context(() => {
-//   //     const titleAnimation = gsap.timeline({
-//   //       scrollTrigger: {
-//   //         trigger: containerRef.current,
-//   //         start: "100 bottom",
-//   //         end: "center bottom",
-//   //         toggleActions: "play none none reverse",
-//   //       },
-//   //     });
-
-//   //     titleAnimation.to(
-//   //       ".animated-word",
-//   //       {
-//   //         opacity: 1,
-//   //         transform: "translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg)",
-//   //         ease: "power2.inOut",
-//   //         stagger: 0.05,
-//   //       },
-//   //       0
-//   //     );
-//   //   }, containerRef);
-
-//   //   return () => ctx.revert();
-//   // }, []);
-
-//   // Video clip animation
-//   useGSAP(() => {
-//     const clipAnimation = gsap.timeline({
-//       scrollTrigger: {
-//         trigger: "#clip",
-//         start: "center center",
-//         end: "+=800 center",
-//         scrub: 0.5,
-//         pin: true,
-//         pinSpacing: true,
-//       },
-//     });
-
-//     clipAnimation.to(".mask-clip-path", {
-//       width: "100vw",
-//       height: "100vh",
-//       borderRadius: 0,
-//     });
-//   });
-
-//   // const titleText = "Hungry? Let’s fix that.";
-//   // const words = titleText.split(" ").map((word, i) => (
-//   //   <span
-//   //     key={i}
-//   //     className="animated-word inline-block opacity-0 transform translate-y-10 rotateX(15deg)"
-//   //     style={{ marginRight: "0.25ch" }}
-//   //   >
-//   //     {word}
-//   //   </span>
-//   // ));
-
-//   return (
-//     <div id="about" className="min-h-screen w-screen" ref={containerRef}>
-//       <div className="relative mb-8 mt-20 flex flex-col items-center gap-5">
-//         {/* <h2 className="mt-5 text-7xl text-center font-bold font-bebas text-green-500">
-//           {words}
-//         </h2> */}
-//         <AnimatedText
-//           text="Hungry? Let’s fix that."
-//           triggerRef={containerRef}
-//           className="mt-5 text-7xl text-green-500"
-//         />
-
-//         <div>
-//           <p className="text-gray-500">
-//             Why settle for boring food? Get bold, delicious meals delivered fast
-//             — wherever you are on campus.
-//           </p>
-//         </div>
-//         <div className="absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem]">
-//           <Button
-//             id="browse-menu"
-//             title="Order Now"
-//             // leftIcon={<TiLocationArrow />}
-//             containerClass="flex-center gap-1"
-//           />
-//         </div>
-//       </div>
-
-//       <div className="h-dvh w-screen" id="clip">
-//         <div className="mask-clip-path absolute left-1/2 top-0 z-20 h-[60vh] w-screen origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw] [clip-path: polygon(20% 0%, 80% 10%, 95% 95%, 27% 90%)]">
-//           <video
-//             src={assets.burgerVideo}
-//             muted
-//             autoPlay
-//             loop
-//             className="absolute left-0 top-0 size-full object-cover"
-//           ></video>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default InfoSections;
-
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { assets } from "../assets/assets";
 import AnimatedText from "./AnimatedText";
-import { foodData } from "../assets/assets";
 import ScrollTextReveal from "./ScrollTextReveal";
 import {
   Search,
@@ -130,17 +13,27 @@ import {
   Grid3X3,
   Star,
   Heart,
+  IceCream,
 } from "lucide-react";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
-const tabs = ["rice", "snacks", "drinks", "desserts"];
+const tabs = ["main", "snacks", "drinks", "desserts"];
 
 gsap.registerPlugin(ScrollTrigger);
 
 const InfoSections = () => {
-  const [activeTab, setActiveTab] = useState("rice");
+  const {
+    favourites,
+    addToFavourites,
+    removeFromFavourites,
+    addToCart,
+    foodItems,
+  } = useContext(AppContext);
+  const [activeTab, setActiveTab] = useState("Main");
   const [favorites, setFavorites] = useState(new Set());
 
-  const filteredItems = foodData.filter((item) => item.category === activeTab);
+  const filteredItems = foodItems.filter((item) => item.category === activeTab);
 
   const redRef = useRef(null);
   const endRef = useRef(null);
@@ -149,20 +42,14 @@ const InfoSections = () => {
   const wrapperRef = useRef(null);
   const containerRef = useRef(null);
 
-  const toggleFavorite = (id) => {
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      newFavorites.has(id) ? newFavorites.delete(id) : newFavorites.add(id);
-      return newFavorites;
-    });
+  const toggleFavorite = (item) => {
+    const exists = favourites.some((fav) => fav._id === item._id);
+    if (exists) removeFromFavourites(item._id);
+    else addToFavourites(item);
   };
 
   const handleOnClick = (id) => {
     navigate(`/food/${id}`);
-  };
-
-  const addToCart = (id) => {
-    console.log("Adding food item", id, "to cart");
   };
 
   useEffect(() => {
@@ -293,10 +180,10 @@ const InfoSections = () => {
             <div className="absolute bottom-0 z-20 md:h-[500px] h-[600px] w-screen">
               <div className="grid grid-cols-4 gap-4">
                 {[
-                  { label: "Rice", category: "rice", Icon: Pizza },
+                  { label: "Main", category: "main", Icon: Pizza },
                   { label: "Snacks", category: "snacks", Icon: Cookie },
                   { label: "Drinks", category: "drinks", Icon: Wine },
-                  { label: "More", category: "all", Icon: Grid3X3 },
+                  { label: "Desserts", category: "dessert", Icon: IceCream },
                 ].map(({ label, category, Icon }) => {
                   const isActive = filteredItems === category;
                   const padding = isActive ? "p-5" : "p-4";
@@ -329,56 +216,63 @@ const InfoSections = () => {
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 mt-16 px-5 bg-gray-100">
                 {filteredItems.slice(0, 4).map((item) => (
                   <div
-                    key={item.id}
+                    key={item._id}
                     className="bg-white rounded-xl shadow-lg overflow-hidden pb-1 cursor-pointer"
-                    onClick={() => handleOnClick(item.id)}
+                    onClick={() => handleOnClick(item._id)}
                   >
                     <div className="relative p-1.5">
                       <img
                         src={item.image}
                         alt={item.name}
-                        className="w-full h-[120px] sm:h-[160px] md:h-[200px] object-cover rounded-lg"
+                        className="w-full h-[160px] md:h-[200px] object-cover rounded-lg"
                       />
                       <div className="absolute top-3 left-3 bg-white rounded-full px-1.5 py-0.5 flex items-center gap-0.5">
                         <Star className="w-3 h-3 md:w-4 md:h-4 fill-red-500 text-red-500" />
-                        <span className="text-xs md:text-sm font-semibold text-black">
+                        <span className="text-xs md:text-sm font-semibold">
                           {item.rating}
                         </span>
                       </div>
-                      <button
+
+                      {/* favorite icon wrapper is now a div */}
+                      <div
                         onClick={(e) => {
                           e.stopPropagation();
-                          toggleFavorite(item.id);
+                          toggleFavorite(item);
                         }}
                         className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow-md hover:bg-gray-50 transition-colors cursor-pointer"
                       >
                         <Heart
                           className={`w-3 h-3 md:w-5 md:h-5 ${
-                            favorites.has(item.id)
-                              ? "fill-red-500 text-red-500"
+                            favourites.some((fav) => fav._id === item._id)
+                              ? "text-red-500"
                               : "text-gray-400"
                           }`}
+                          fill={
+                            favourites.some((fav) => fav._id === item._id)
+                              ? "red"
+                              : "none"
+                          }
                         />
-                      </button>
+                      </div>
                     </div>
                     <div className="p-1.5">
-                      <h3 className="font-semibold text-sm text-black md:text-lg truncate">
+                      <h3 className="font-semibold text-sm md:text-lg truncate">
                         {item.name}
                       </h3>
                       <div className="flex items-center justify-between">
                         <span className="text-gray-600 text-xs md:text-sm truncate">
-                          {item.restaurant}
+                          {item.vendor.restaurantName}
                         </span>
                         <span className="font-semibold text-sm md:text-base">
-                          ${item.price.toFixed(1)}
+                          ₹{item.price}
                         </span>
                       </div>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          addToCart(item.id);
+                          addToCart(item._id, 1);
                         }}
-                        className="mt-2 w-[85%] mx-auto flex justify-center items-center text-sm py-1 px-3 border border-green-600 text-green-600 bg-green-100 hover:bg-green-600 hover:text-white transition-colors rounded"
+                        className="mt-2 w-[85%] mx-auto flex justify-center items-center text-sm py-1 px-3 border border-red-600 text-red-600 bg-red-100 hover:bg-red-600 hover:text-white transition-colors rounded"
                       >
                         Add to Cart
                       </button>

@@ -3,6 +3,7 @@ const Order = require("../models/order.model");
 const Food = require("../models/food.model");
 const User = require("../models/user.model");
 const Vendor = require("../models/vendor.model");
+const customAlphabet = require("nanoid").customAlphabet;
 
 // function sendNotificationToVendor(vendorId, notification) {
 //   console.log(`Sending notification to vendor ${vendorId}...`);
@@ -191,14 +192,18 @@ exports.createOrder = async (req, res) => {
       orderItems.push({ foodItem: food._id, quantity });
     }
 
+    const nanoid = customAlphabet("0123456789", 5);
+
     // 4️⃣ Create the order
     const order = new Order({
+      orderId: nanoid(),
       user: req.user.id,
       customerName: user.name,
       customerPhone: user.mobile,
       orderType,
       payment,
       address,
+      orderedDate: new Date(),
       items: orderItems,
       totalAmount: +totalAmount.toFixed(2),
     });
@@ -211,7 +216,7 @@ exports.createOrder = async (req, res) => {
     // 6️⃣ Respond
     res.status(201).json({
       message: "Order placed",
-      orderId: order._id,
+      orderId: order.orderId,
       customerName: order.customerName,
       customerPhone: order.customerPhone,
       totalAmount: order.totalAmount,
@@ -265,7 +270,7 @@ exports.getVendorOrders = async (req, res) => {
       );
 
       return {
-        _id: order._id,
+        orderId: order.orderId,
         user: order.user,
         orderType: order.orderType,
         payment: order.payment,
@@ -295,19 +300,29 @@ exports.getVendorOrders = async (req, res) => {
 
 // UPDATE order status (any vendor; no vendor check for mixed orders)
 exports.updateOrderStatus = async (req, res) => {
-  const { orderId } = req.params;
-  const { orderStatus } = req.body;
-  const allowed = ["Processing", "Delivered", "Cancelled"];
+  const { orderId, orderStatus } = req.body;
+
+  if (!orderId || !orderStatus) {
+    return res
+      .status(400)
+      .json({ message: "Order ID and status are required" });
+  }
+
+  const allowed = ["Processing", "Confirmed", "Delivered", "Cancelled"];
   if (!allowed.includes(orderStatus)) {
     return res.status(400).json({ message: "Invalid status" });
   }
 
   try {
-    const order = await Order.findById(orderId);
+    const order = await Order.findOne({ orderId });
+
     if (!order) return res.status(404).json({ message: "Order not found" });
 
     order.orderStatus = orderStatus;
-    if (orderStatus === "Delivered") order.deliveredTime = new Date();
+    if (orderStatus === "Delivered") {
+      order.deliveredTime = new Date();
+    }
+
     await order.save();
 
     res.status(200).json({ message: "Order status updated", order });

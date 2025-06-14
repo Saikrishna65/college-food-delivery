@@ -432,7 +432,7 @@ export const foodData = [
     tags: ["🍗 Nonveg", "🔥 Spicy"],
   },
   {
-    _id: "68441f7a769c682381d23394",
+    _id: "6845028a52b7cc2b1a8497d6",
     name: "Vegetable Fried Rice",
     restaurant: "Asian Wok",
     restaurantAddress: "456 Wok Avenue, Singapore",

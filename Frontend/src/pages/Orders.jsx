@@ -3,7 +3,7 @@ import { AppContext } from "../context/AppContext";
 import OrderCard from "../components/OrderCard";
 
 const Orders = () => {
-  const { allOrders } = useContext(AppContext);
+  const { userOrders } = useContext(AppContext);
 
   const handleReorder = (orderId) => {
     console.log(`Reordering order ${orderId}`);
@@ -16,7 +16,7 @@ const Orders = () => {
           Your Orders
         </h2>
         <div className="flex flex-col justify-center gap-4">
-          {allOrders.map((order) => (
+          {userOrders.map((order) => (
             <OrderCard key={order.id} order={order} />
           ))}
         </div>

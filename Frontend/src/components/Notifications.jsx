@@ -1,43 +1,18 @@
-// src/pages/Notifications.jsx
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import { toast } from "react-toastify";
 
 const Notifications = () => {
-  const { notifications, setNotifications, socket, fetchVendorNotifications } =
-    useContext(AppContext);
-
-  // 1️⃣ Fetch notifications once on mount
-  useEffect(() => {
-    fetchVendorNotifications();
-  }, [fetchVendorNotifications]);
-
-  // 2️⃣ Mark as read visually (optional backend sync can be added)
-  useEffect(() => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-  }, [setNotifications]);
-
-  // 3️⃣ Real-time socket listener
-  useEffect(() => {
-    if (!socket) return;
-
-    const handler = (notif) => {
-      setNotifications((prev) => [notif, ...prev]);
-      toast.info(notif.message);
-    };
-
-    socket.on("newNotification", handler);
-    return () => socket.off("newNotification", handler);
-  }, [socket, setNotifications]);
+  const { notifications } = useContext(AppContext);
 
   return (
     <div className="p-6">
       <h1 className="text-2xl font-semibold mb-4">Notifications</h1>
+
       {notifications.length === 0 ? (
         <p className="text-gray-500">No notifications.</p>
       ) : (
         <ul className="space-y-2">
-          {notifications.map((n) => (
+          {[...notifications].reverse().map((n) => (
             <li
               key={n._id}
               className={`p-4 rounded shadow ${

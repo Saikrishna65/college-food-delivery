@@ -1,104 +1,71 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useContext } from "react";
 import Navbar from "../components/Navbar";
 import Loading from "../components/Loading";
-import { foodData } from "../assets/assets";
 import {
   Search,
   SlidersHorizontal,
   Pizza,
   Cookie,
   Wine,
-  Grid3X3,
+  IceCream,
   Star,
   Heart,
 } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
-import axios from "axios";
 
-function FoodPage() {
-  const [favorites, setFavorites] = useState(new Set());
-  const [selectedCategory, setSelectedCategory] = useState("rice");
-  const [loading, setLoading] = useState(true);
+const FoodPage = () => {
+  const [selectedCategory, setSelectedCategory] = useState("Main Course");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { setCart } = useContext(AppContext);
+  const {
+    foodItems,
+    loading, // use context’s loading
+    addToCart,
+    favourites,
+    addToFavourites,
+    removeFromFavourites,
+  } = useContext(AppContext);
 
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Sync searchQuery from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     setSearchQuery(params.get("search") || "");
   }, [location.search]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
+  const handleAddingCart = (id) => {
+    addToCart(id, 1);
+  };
 
-  const toggleFavorite = (id) => {
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      newFavorites.has(id) ? newFavorites.delete(id) : newFavorites.add(id);
-      return newFavorites;
-    });
+  const toggleFavorite = (item) => {
+    const exists = favourites.some((fav) => fav._id === item._id);
+    if (exists) removeFromFavourites(item._id);
+    else addToFavourites(item);
   };
 
   const handleOnClick = (id) => {
     navigate(`/food/${id}`);
   };
 
-  const addToCart = async (_id) => {
-    console.log("Adding to cart:", _id);
-    const token = localStorage.getItem("user token");
-    if (!token) return navigate("/login");
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/cart/add`,
-        { foodItemId: _id, quantity: 1 }, // ✅ this is the fix
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        console.log("Added to cart", response.data);
-      }
-    } catch (err) {
-      console.error(
-        "addToCart failed:",
-        err.response?.data?.message || err.message
-      );
-      if (err.response?.status === 401) {
-        localStorage.removeItem("token");
-        navigate("/login");
-      }
-    }
-  };
-
   const handleSearch = () => {
     navigate(`/fooditems?search=${encodeURIComponent(searchQuery.trim())}`);
   };
 
-  const filteredFoodData = useMemo(() => {
+  // Filter by search OR category
+  const filteredFoodItems = useMemo(() => {
+    let items = foodItems || [];
     if (searchQuery) {
-      return foodData.filter((item) =>
+      return items.filter((item) =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    return foodData.filter((item) =>
-      selectedCategory === "all" ? true : item.category === selectedCategory
-    );
-  }, [searchQuery, selectedCategory]);
+    return items.filter((item) => item.category === selectedCategory);
+  }, [foodItems, searchQuery, selectedCategory]);
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <>
@@ -125,12 +92,9 @@ function FoodPage() {
                 className="flex-1 ml-2 outline-none text-gray-700 md:text-lg"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    handleSearch();
-                  }
-                }}
+                onKeyDown={(e) =>
+                  e.key === "Enter" && (e.preventDefault(), handleSearch())
+                }
               />
               <button className="p-2" onClick={handleSearch}>
                 <SlidersHorizontal className="text-gray-400 w-5 h-5 md:w-6 md:h-6" />
@@ -143,23 +107,24 @@ function FoodPage() {
         <div className="max-w-md md:max-w-4xl lg:max-w-6xl mx-auto px-4 mt-12">
           <div className="grid grid-cols-4 gap-4">
             {[
-              { label: "Rice", category: "rice", Icon: Pizza },
+              { label: "Main", category: "Main Course", Icon: Pizza },
               { label: "Snacks", category: "snacks", Icon: Cookie },
               { label: "Drinks", category: "drinks", Icon: Wine },
-              { label: "More", category: "all", Icon: Grid3X3 },
+              { label: "Dessert", category: "dessert", Icon: IceCream },
             ].map(({ label, category, Icon }) => {
               const isActive = selectedCategory === category;
-              const padding = isActive ? "p-5" : "p-4";
               return (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`flex flex-col items-center group transition-transform cursor-pointer ${
+                  className={`flex flex-col items-center transition-transform ${
                     isActive ? "scale-110" : "scale-100"
                   }`}
                 >
                   <div
-                    className={`bg-red-100 text-red-600 ${padding} rounded-2xl mb-1 group-hover:shadow-md transition-shadow`}
+                    className={`bg-red-100 text-red-600 rounded-2xl transition-shadow ${
+                      isActive ? "p-5" : "p-4"
+                    }`}
                   >
                     <Icon className="w-6 h-6 md:w-8 md:h-8" />
                   </div>
@@ -182,79 +147,84 @@ function FoodPage() {
             Food Items
           </h2>
           <div className="min-h-screen p-2">
-            <div className="mx-auto">
-              {filteredFoodData.length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
-                  {filteredFoodData.map((item) => (
-                    <div
-                      key={item.id}
-                      className="bg-white rounded-xl shadow-lg overflow-hidden pb-1 cursor-pointer"
-                      onClick={() => handleOnClick(item._id)}
-                    >
-                      <div className="relative p-1.5">
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-[120px] sm:h-[160px] md:h-[200px] object-cover rounded-lg"
-                        />
-                        <div className="absolute top-3 left-3 bg-white rounded-full px-1.5 py-0.5 flex items-center gap-0.5">
-                          <Star className="w-3 h-3 md:w-4 md:h-4 fill-red-500 text-red-500" />
-                          <span className="text-xs md:text-sm font-semibold">
-                            {item.rating}
-                          </span>
-                        </div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleFavorite(item.id);
-                          }}
-                          className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow-md hover:bg-gray-50 transition-colors cursor-pointer"
-                        >
-                          <Heart
-                            className={`w-3 h-3 md:w-5 md:h-5 ${
-                              favorites.has(item.id)
-                                ? "fill-red-500 text-red-500"
-                                : "text-gray-400"
-                            }`}
-                          />
-                        </button>
+            {filteredFoodItems.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {filteredFoodItems.map((item) => (
+                  <div
+                    key={item._id}
+                    className="bg-white rounded-xl shadow-lg overflow-hidden pb-1 cursor-pointer"
+                    onClick={() => handleOnClick(item._id)}
+                  >
+                    <div className="relative p-1.5">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-[160px] md:h-[200px] object-cover rounded-lg"
+                      />
+                      <div className="absolute top-3 left-3 bg-white rounded-full px-1.5 py-0.5 flex items-center gap-0.5">
+                        <Star className="w-3 h-3 md:w-4 md:h-4 fill-red-500 text-red-500" />
+                        <span className="text-xs md:text-sm font-semibold">
+                          {item.rating}
+                        </span>
                       </div>
-                      <div className="p-1.5">
-                        <h3 className="font-semibold text-sm md:text-lg truncate">
-                          {item.name}
-                        </h3>
-                        <div className="flex items-center justify-between">
-                          <span className="text-gray-600 text-xs md:text-sm truncate">
-                            {item.restaurant}
-                          </span>
-                          <span className="font-semibold text-sm md:text-base">
-                            ${item.price.toFixed(1)}
-                          </span>
-                        </div>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            addToCart(item._id);
-                          }}
-                          className="mt-2 w-[85%] mx-auto flex justify-center items-center text-sm py-1 px-3 border border-red-600 text-red-600 bg-red-100 hover:bg-red-600 hover:text-white transition-colors rounded"
-                        >
-                          Add to Cart
-                        </button>
+
+                      {/* favorite icon wrapper is now a div */}
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavorite(item);
+                        }}
+                        className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow-md hover:bg-gray-50 transition-colors cursor-pointer"
+                      >
+                        <Heart
+                          className={`w-3 h-3 md:w-5 md:h-5 ${
+                            favourites.some((fav) => fav._id === item._id)
+                              ? "text-red-500"
+                              : "text-gray-400"
+                          }`}
+                          fill={
+                            favourites.some((fav) => fav._id === item._id)
+                              ? "red"
+                              : "none"
+                          }
+                        />
                       </div>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center text-gray-500 text-lg">
-                  No food items found
-                </p>
-              )}
-            </div>
+                    <div className="p-1.5">
+                      <h3 className="font-semibold text-sm md:text-lg truncate">
+                        {item.name}
+                      </h3>
+                      <div className="flex items-center justify-between">
+                        <span className="text-gray-600 text-xs md:text-sm truncate">
+                          {item.vendor.restaurantName}
+                        </span>
+                        <span className="font-semibold text-sm md:text-base">
+                          ₹{item.price}
+                        </span>
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAddingCart(item._id);
+                        }}
+                        className="mt-2 w-[85%] mx-auto flex justify-center items-center text-sm py-1 px-3 border border-red-600 text-red-600 bg-red-100 hover:bg-red-600 hover:text-white transition-colors rounded"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-500 text-lg">
+                No food items found for “{selectedCategory}”
+              </p>
+            )}
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default FoodPage;

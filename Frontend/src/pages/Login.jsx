@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "../context/AppContext";
 
-const AuthForm = () => {
+const Login = () => {
   const navigate = useNavigate();
   const { setUser, setVendor } = useContext(AppContext);
 
@@ -29,24 +29,34 @@ const AuthForm = () => {
     }
 
     try {
-      const url = `${
-        import.meta.env.VITE_BASE_URL
-      }/${authEntity}s/${authAction}`;
+      const baseURL = import.meta.env.VITE_BASE_URL;
 
-      const response = await axios.post(url, payload);
+      // 🔁 Frontend-only: ensure other session is logged out before proceeding
+      if (authEntity === "user") {
+        await axios
+          .post(`${baseURL}/vendors/logout`, {}, { withCredentials: true })
+          .catch(() => {});
+      } else {
+        await axios
+          .post(`${baseURL}/users/logout`, {}, { withCredentials: true })
+          .catch(() => {});
+      }
+
+      const url = `${baseURL}/${authEntity}s/${authAction}`;
+      const response = await axios.post(url, payload, {
+        withCredentials: true,
+      });
 
       if (response.status === 200 || response.status === 201) {
-        const { token, user, vendor } = response.data;
-        localStorage.setItem(
-          authEntity === "user" ? "user token" : "vendor token",
-          token
-        );
+        const { user, vendor } = response.data;
 
         if (authEntity === "user") {
           setUser(user);
+          setVendor(null); // ensure vendor state is cleared
           navigate(authAction === "login" ? "/" : "/login");
         } else {
           setVendor(vendor);
+          setUser(null); // ensure user state is cleared
           navigate("/vendor/dashboard");
         }
       }
@@ -72,7 +82,6 @@ const AuthForm = () => {
         viewport={{ once: true }}
         className="relative bg-white p-10 rounded-xl text-slate-500 w-full max-w-md"
       >
-        {/* Entity toggle */}
         <div className="flex justify-center gap-4 mb-4">
           {["user", "vendor"].map((ent) => (
             <button
@@ -102,7 +111,6 @@ const AuthForm = () => {
             : "Create your account"}
         </p>
 
-        {/* Name & Mobile for user registration only */}
         {authAction === "register" && authEntity === "user" && (
           <>
             <div className="border px-6 py-2 flex items-center gap-2 rounded-full mb-4">
@@ -192,4 +200,4 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default Login;

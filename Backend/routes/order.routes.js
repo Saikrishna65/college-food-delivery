@@ -14,7 +14,7 @@ router.get("/user", authUser, orderController.getUserOrders);
 router.get("/vendor", authVendor, orderController.getVendorOrders);
 
 // Vendor updates order status
-router.patch("/:orderId/status", authVendor, orderController.updateOrderStatus);
+router.patch("/status", authVendor, orderController.updateOrderStatus);
 
 // User cancels their order
 router.patch("/:orderId/cancel", authUser, orderController.cancelOrder);

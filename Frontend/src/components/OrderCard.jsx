@@ -9,11 +9,6 @@ const OrderCard = ({ order }) => {
     console.log(`Reordering order ${orderId}`);
   };
 
-  const totalPrice = (order.items || []).reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
-
   return (
     <div
       key={order.id}
@@ -23,21 +18,21 @@ const OrderCard = ({ order }) => {
         <div>
           <div className="flex">
             <div className="flex flex-col lg:flex-row p-4 w-[65%] lg:w-[75%] lg:justify-between gap-[0.3rem] lg:gap-[0.7rem]">
-              <div className="flex-1">
+              {/* <div className="flex-1">
                 <h3 className="restaurant-name">{order.restaurantName}</h3>
-              </div>
+              </div> */}
               <div className="flex-1">
                 <p className="text-sm">
-                  Ordered on {new Date(order.orderDate).toLocaleDateString()}
+                  Ordered on {new Date(order.orderedDate).toLocaleDateString()}
                 </p>
               </div>
               <div className="flex-1">
-                {order.orderType === "Delivery" ? (
+                {order.orderType === "delivery" ? (
                   <p className="order-status text-sm">
                     Status:{" "}
                     <span
                       className={
-                        order.orderStatus === "Delivered"
+                        order.orderStatus === "delivered"
                           ? "text-[#16a34a]"
                           : "text-[#ffb200]"
                       }
@@ -80,11 +75,11 @@ const OrderCard = ({ order }) => {
             <div className="w-[40%] flex flex-col items-center justify-center gap-[0.3rem] lg:w-[25%] lg:pt-[0.5rem] lg:pr-[0.5rem] lg:flex-row lg:gap-[0.5rem]">
               <div className="w-full text-center flex flex-col">
                 <span className="text-lg font-semibold pt-[0.4rem] text-[#111827] whitespace-nowrap">
-                  Total: ₹{totalPrice}
+                  Total: ₹{order.totalAmount}
                 </span>
                 <span
                   className={`p-[0.3rem] pt-0 ${
-                    order.payment?.toLowerCase() === "paid"
+                    order.paymentStatus?.toLowerCase() === "paid"
                       ? "text-[#145ede]"
                       : "text-red-600"
                   }`}
@@ -118,35 +113,35 @@ const OrderCard = ({ order }) => {
                 <div className={`flex p-4 ${item.rating !== 0 ? "pb-0" : ""}`}>
                   <div className="w-[5.5rem] h-[5.5rem]">
                     <img
-                      src={item.image}
-                      alt={item.foodName}
+                      src={item.foodItem.image}
+                      alt={item.foodItem.name}
                       className="w-full h-full rounded-[7px]"
                     />
                   </div>
                   <div className="flex flex-col gap-[0.3rem] pl-4">
                     <div className="flex gap-[0.5rem]">
-                      <h4 className="order-food-name">{item.foodName}</h4>
+                      <h4 className="order-food-name">{item.foodItem.name}</h4>
                       <p className="order-item-quantity">x{item.quantity}</p>
                     </div>
                     <div>
                       <p className="order-item-price whitespace-nowrap">
-                        single piece: ₹{item.price}
+                        single piece: ₹{item.foodItem.price}
                       </p>
                     </div>
                     <div className="flex items-center gap-[2rem]">
                       <div className="flex flex-col gap-[0.3rem]">
-                        <p className="order-onions whitespace-nowrap">
+                        {/* <p className="order-onions whitespace-nowrap">
                           Onions: {item.onions}
-                        </p>
+                        </p> */}
                         <p className="order-item-total-price whitespace-nowrap">
-                          Total: ₹{item.price * item.quantity}
+                          Total: ₹{item.foodItem.price * item.quantity}
                         </p>
                       </div>
                       <div>
                         <div className="w-full">
                           <button
                             onClick={() => handleReorder(item.id)}
-                            className="bg-[#16a34a] text-white p-[0.5rem] rounded-[0.5rem] inline-flex items-center gap-[0.5rem] cursor-pointer transition-colors duration-300"
+                            className="bg-[#16a34a] text-white p-[0.5rem] mb-2 rounded-[0.5rem] inline-flex items-center gap-[0.5rem] cursor-pointer transition-colors duration-300"
                           >
                             <ShoppingBag size={20} />
                             Reorder

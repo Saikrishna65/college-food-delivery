@@ -104,7 +104,7 @@ exports.updateCartItem = async (req, res) => {
 
 // ✅ Remove item from cart
 exports.removeFromCart = async (req, res) => {
-  const { foodItemId } = req.body;
+  const { foodItemId } = req.query;
 
   // Validate ObjectId
   if (!mongoose.Types.ObjectId.isValid(foodItemId)) {

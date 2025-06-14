@@ -22,13 +22,25 @@ const FoodDetails = () => {
   };
 
   useEffect(() => {
-    if (foodData && id) {
-      const AboutItem = foodData.find(
-        (item) => item.id === (typeof item.id === "number" ? +id : id)
-      );
-      setTimeout(() => setFoodItem(AboutItem), 1000);
-    }
-  }, [id]);
+    if (!foodData || !id) return;
+
+    // Schedule the lookup
+    const timeoutId = setTimeout(() => {
+      const AboutItem = foodData.find((item) => {
+        // If your item._id is stored as a number, compare numerically:
+        if (typeof item._id === "number") {
+          return item._id === Number(id);
+        }
+        // Otherwise compare as strings:
+        return item._id === id;
+      });
+
+      setFoodItem(AboutItem);
+    }, 1000);
+
+    // Cleanup on unmount or before next effect run
+    return () => clearTimeout(timeoutId);
+  }, [foodData, id]);
 
   if (!foodItem) {
     return <Loading />;

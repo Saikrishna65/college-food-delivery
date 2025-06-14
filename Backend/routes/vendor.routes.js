@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const vendorController = require("../controllers/vendor.controller");
+const foodController = require("../controllers/food.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 
 router.post(
@@ -72,7 +73,7 @@ router.put(
 router.get(
   "/food-items",
   authMiddleware.authVendor,
-  vendorController.getVendorFoodItems
+  foodController.getVendorFoodItems
 );
 
 router.post(
@@ -89,6 +90,24 @@ router.post(
     body("image").optional().isURL().withMessage("Invalid image URL"),
   ],
   vendorController.addFoodItem
+);
+
+router.get(
+  "/dashboard-data",
+  authMiddleware.authVendor,
+  vendorController.getDashboardData
+);
+
+router.get(
+  "/status",
+  authMiddleware.authVendor,
+  vendorController.getVendorStatus
+);
+
+router.put(
+  "/toggle-availability",
+  authMiddleware.authVendor,
+  vendorController.toggleAvailability
 );
 
 router.get("/logout", authMiddleware.authVendor, vendorController.logoutVendor);

@@ -8,7 +8,6 @@ import Cart from "./pages/Cart";
 import MyProfile from "./pages/MyProfile";
 import Profile from "./pages/Profile";
 import Favourites from "./pages/Favourites";
-import Logout from "./pages/Logout";
 import Login from "./pages/Login";
 import FoodDetails from "./pages/FoodDetails";
 import ScrollToTop from "./components/ScrollToTop";
@@ -19,6 +18,10 @@ import VendorDashboard from "./pages/VendorDashboard";
 import Notifications from "./components/Notifications";
 import OrderTable from "./components/OrderTable";
 import VendorDashboardData from "./components/VendorDashboardData";
+import VendorProtectWrapper from "./pages/VendorProtectWrapper";
+import VendorAddFood from "./components/VendorAddFood";
+import EditVendorProfile from "./components/EditVendorProfile";
+import VendorFoodItems from "./components/VendorFoodItems";
 
 const App = () => {
   return (
@@ -67,12 +70,21 @@ const App = () => {
           <Route path="favourites" element={<Favourites />} />
           <Route path="orders" element={<Orders />} />
         </Route>
-        <Route path="/vendor/dashboard" element={<VendorDashboard />}>
+        <Route
+          path="/vendor"
+          element={
+            <VendorProtectWrapper>
+              <VendorDashboard />
+            </VendorProtectWrapper>
+          }
+        >
           <Route path="orders" element={<OrderTable />} />
           <Route path="dashboard" element={<VendorDashboardData />} />
           <Route path="notifications" element={<Notifications />} />
+          <Route path="add-food" element={<VendorAddFood />} />
+          <Route path="food-items" element={<VendorFoodItems />} />
+          <Route path="profile" element={<EditVendorProfile />} />
         </Route>
-        <Route path="/logout" element={<Logout />} />
       </Routes>
     </div>
   );

@@ -32,6 +32,25 @@ router.post(
   userController.loginUser
 );
 
+router.patch(
+  "/update-profile",
+  authMiddleware.authUser,
+  userController.updateUserProfile
+);
+
+router.post(
+  "/add-favorite",
+  authMiddleware.authUser,
+  userController.addFavourite
+);
+router.get("/favorites", authMiddleware.authUser, userController.getFavourites);
+
+router.delete(
+  "/remove-favorite",
+  authMiddleware.authUser,
+  userController.removeFavourite
+);
+
 router.get("/profile", authMiddleware.authUser, userController.getUserProfile);
 
 router.get("/logout", authMiddleware.authUser, userController.logoutUser);
