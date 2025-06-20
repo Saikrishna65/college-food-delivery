@@ -39,12 +39,12 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
-app.use("users", userRoutes);
-app.use("cart", cartRoutes);
-app.use("vendors", vendorRoutes);
-app.use("orders", orderRoutes);
-app.use("vendors", notificationRoutes);
-app.use("food", foodRoutes);
+app.use("/users", userRoutes);
+app.use("/cart", cartRoutes);
+app.use("/vendors", vendorRoutes);
+app.use("/orders", orderRoutes);
+app.use("/vendors", notificationRoutes);
+app.use("/food", foodRoutes);
 
 // Create HTTP server
 const port = process.env.PORT || 3000;
