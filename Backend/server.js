@@ -24,10 +24,14 @@ const app = express();
 // Connect to database
 connectToDb();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://college-food-delivery.vercel.app",
+];
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173", // frontend origin
+    origin: allowedOrigins, // frontend origin
     credentials: true, // ✅ allow cookies to be sent
   })
 );
