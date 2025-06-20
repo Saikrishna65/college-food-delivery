@@ -18,8 +18,6 @@ import {
 import { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 
-const tabs = ["main", "snacks", "drinks", "desserts"];
-
 gsap.registerPlugin(ScrollTrigger);
 
 const InfoSections = () => {
@@ -30,7 +28,7 @@ const InfoSections = () => {
     addToCart,
     foodItems,
   } = useContext(AppContext);
-  const [activeTab, setActiveTab] = useState("Main");
+  const [activeTab, setActiveTab] = useState("Main Course");
   const [favorites, setFavorites] = useState(new Set());
 
   const filteredItems = foodItems.filter((item) => item.category === activeTab);
@@ -141,7 +139,7 @@ const InfoSections = () => {
                 className="absolute inset-0 bg-gray-100 flex items-center justify-center"
                 style={{
                   /* Initial tiny dot at center: 1% radius */
-                  clipPath: "circle(1% at 50% 50%)",
+                  clipPath: "circle(0.5% at 50% 50%)",
                   WebkitClipPath: "circle(1% at 50% 50%)",
                 }}
               >
@@ -162,28 +160,28 @@ const InfoSections = () => {
 
             {/* Floating colored boxes for visual context */}
             <div
-              className="absolute top-[600px] left-5 md:top-[500px] md:left-30 z-20 h-40 w-28 md:h-72 md:w-60 bg-cover bg-center"
+              className="absolute top-[600px] left-5 md:top-[500px] lg:left-30 z-20 h-40 w-28 md:h-72 md:w-60 bg-cover bg-center"
               style={{ backgroundImage: `url(${assets.foodShow1})` }}
             ></div>
             <div
-              className="absolute top-[750px] right-5 md:top-[700px] md:right-30 z-20 h-48 w-36 md:h-96 md:w-72 bg-cover bg-center"
+              className="absolute top-[750px] right-5 md:top-[700px] lg:right-30 z-20 h-48 w-36 md:h-96 md:w-72 bg-cover bg-center"
               style={{ backgroundImage: `url(${assets.foodShow2})` }}
             ></div>
             <div
-              className="absolute top-[930px] left-5 md:top-[1000px] md:left-90 z-20 h-36 w-32 md:h-80 md:w-60 bg-cover bg-center"
+              className="absolute top-[930px] left-5 md:top-[1000px] lg:left-90 z-20 h-36 w-32 md:h-80 md:w-60 bg-cover bg-center"
               style={{ backgroundImage: `url(${assets.foodShow3})` }}
             ></div>
             <div
-              className="absolute top-[1050px] right-24 md:top-[1500px] md:right-[500px] z-20 h-30 w-24 md:h-80 md:w-60 bg-cover bg-center"
+              className="absolute top-[1050px] right-24 md:top-[1500px] lg:right-[500px] z-20 h-30 w-24 md:h-80 md:w-60 bg-cover bg-center"
               style={{ backgroundImage: `url(${assets.foodShow4})` }}
             ></div>
             <div className="absolute bottom-0 z-20 md:h-[500px] h-[600px] w-screen">
               <div className="grid grid-cols-4 gap-4">
                 {[
-                  { label: "Main", category: "main", Icon: Pizza },
-                  { label: "Snacks", category: "snacks", Icon: Cookie },
-                  { label: "Drinks", category: "drinks", Icon: Wine },
-                  { label: "Desserts", category: "dessert", Icon: IceCream },
+                  { label: "Main", category: "Main Course", Icon: Pizza },
+                  { label: "Snacks", category: "Snacks", Icon: Cookie },
+                  { label: "Drinks", category: "Drinks", Icon: Wine },
+                  { label: "Desserts", category: "Dessert", Icon: IceCream },
                 ].map(({ label, category, Icon }) => {
                   const isActive = filteredItems === category;
                   const padding = isActive ? "p-5" : "p-4";
@@ -213,7 +211,7 @@ const InfoSections = () => {
               </div>
 
               {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-10"> */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 mt-16 px-5 bg-gray-100">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 mt-9 px-5 bg-gray-100">
                 {filteredItems.slice(0, 4).map((item) => (
                   <div
                     key={item._id}
@@ -256,7 +254,7 @@ const InfoSections = () => {
                       </div>
                     </div>
                     <div className="p-1.5">
-                      <h3 className="font-semibold text-sm md:text-lg truncate">
+                      <h3 className="font-semibold text-black text-sm md:text-lg truncate">
                         {item.name}
                       </h3>
                       <div className="flex items-center justify-between">

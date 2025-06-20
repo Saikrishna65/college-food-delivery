@@ -22,8 +22,10 @@ import VendorProtectWrapper from "./pages/VendorProtectWrapper";
 import VendorAddFood from "./components/VendorAddFood";
 import EditVendorProfile from "./components/EditVendorProfile";
 import VendorFoodItems from "./components/VendorFoodItems";
+import SmoothScroll from "../smoothScroll";
 
 const App = () => {
+  // SmoothScroll();
   return (
     <div className="bg-gradient-to-b from-teal-50 to-orange-50">
       <ScrollToTop />

@@ -12,8 +12,8 @@
 
 html,
 body {
-  overflow: auto;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
+  /* scroll-behavior: smooth; */
   scrollbar-width: none;
 }
 

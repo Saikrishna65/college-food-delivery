@@ -145,7 +145,7 @@ const VendorAddFood = () => {
             <option value="" disabled>
               Select category
             </option>
-            <option value="Main">Main</option>
+            <option value="Main Course">Main Course</option>
             <option value="Snacks">Snacks</option>
             <option value="Drinks">Drinks</option>
           </select>
