@@ -26,7 +26,7 @@ connectToDb();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://college-food-delivery.vercel.app",
+  "https://college-food-delivery-1.onrender.com",
 ];
 // Middleware
 app.use(
